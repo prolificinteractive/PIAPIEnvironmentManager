@@ -1,6 +1,6 @@
 # README #
 
-### Summary ###
+## Summary 
 
 PiOS PIAPIEnvironmentManager POD to help iOS Engineers manage API Environments
 
@@ -19,4 +19,4 @@ it, simply add the following line to your Podfile:
 
 ## Author 
 
-* Julio , julio@prolificinteractive.com
+Julio , julio@prolificinteractive.com
