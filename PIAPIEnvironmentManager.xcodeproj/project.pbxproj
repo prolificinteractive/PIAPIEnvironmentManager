@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED032C951A6E9A9400E37639 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032C941A6E9A9400E37639 /* main.m */; };
+		ED032C981A6E9A9400E37639 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032C971A6E9A9400E37639 /* AppDelegate.m */; };
+		ED032C9B1A6E9A9400E37639 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032C9A1A6E9A9400E37639 /* ViewController.m */; };
+		ED032C9E1A6E9A9400E37639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED032C9C1A6E9A9400E37639 /* Main.storyboard */; };
+		ED032CA01A6E9A9400E37639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED032C9F1A6E9A9400E37639 /* Images.xcassets */; };
+		ED032CA31A6E9A9400E37639 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */; };
+		ED032CAF1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */; };
+		ED032CC01A6E9AED00E37639 /* PIAPIEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */; };
+		ED032CC11A6E9AED00E37639 /* PIAPIEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */; };
+		ED05E5D21A74239400835133 /* PIAPIEnvironmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */; };
+		ED05E5D31A74239400835133 /* PIAPIEnvironmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED032CA91A6E9A9400E37639 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED032C871A6E9A9400E37639 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED032C8E1A6E9A9400E37639;
+			remoteInfo = PIAPIEnvironmentManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ED032C8F1A6E9A9400E37639 /* PIAPIEnvironmentManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PIAPIEnvironmentManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED032C931A6E9A9400E37639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED032C941A6E9A9400E37639 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ED032C961A6E9A9400E37639 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ED032C971A6E9A9400E37639 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ED032C991A6E9A9400E37639 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		ED032C9A1A6E9A9400E37639 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ED032C9D1A6E9A9400E37639 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ED032C9F1A6E9A9400E37639 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ED032CA21A6E9A9400E37639 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		ED032CA81A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PIAPIEnvironmentManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED032CAD1A6E9A9400E37639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentManagerTests.m; sourceTree = "<group>"; };
+		ED032CB91A6E9AED00E37639 /* PIAPIEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironment.h; path = PIAPIEnvironmentManager/PIAPIEnvironment.h; sourceTree = "<group>"; };
+		ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironment.m; path = PIAPIEnvironmentManager/PIAPIEnvironment.m; sourceTree = "<group>"; };
+		ED032CBB1A6E9AED00E37639 /* PIAPIEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironmentManager.h; path = PIAPIEnvironmentManager/PIAPIEnvironmentManager.h; sourceTree = "<group>"; };
+		ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironmentManager.m; path = PIAPIEnvironmentManager/PIAPIEnvironmentManager.m; sourceTree = "<group>"; };
+		ED05E5CA1A73FB9800835133 /* PIAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIAPIConstants.h; sourceTree = "<group>"; };
+		ED05E5CF1A74239400835133 /* PIAPIEnvironmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironmentViewController.h; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.h; sourceTree = "<group>"; };
+		ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironmentViewController.m; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.m; sourceTree = "<group>"; };
+		ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PIAPIEnvironmentViewController.xib; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED032C8C1A6E9A9400E37639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED032CA51A6E9A9400E37639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED032C861A6E9A9400E37639 = {
+			isa = PBXGroup;
+			children = (
+				ED032C911A6E9A9400E37639 /* PIAPIEnvironmentManager */,
+				ED032CAB1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests */,
+				ED032C901A6E9A9400E37639 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED032C901A6E9A9400E37639 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED032C8F1A6E9A9400E37639 /* PIAPIEnvironmentManager.app */,
+				ED032CA81A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED032C911A6E9A9400E37639 /* PIAPIEnvironmentManager */ = {
+			isa = PBXGroup;
+			children = (
+				ED05E5CA1A73FB9800835133 /* PIAPIConstants.h */,
+				ED032C961A6E9A9400E37639 /* AppDelegate.h */,
+				ED032C971A6E9A9400E37639 /* AppDelegate.m */,
+				ED032C991A6E9A9400E37639 /* ViewController.h */,
+				ED032C9A1A6E9A9400E37639 /* ViewController.m */,
+				ED032C9C1A6E9A9400E37639 /* Main.storyboard */,
+				ED032C9F1A6E9A9400E37639 /* Images.xcassets */,
+				ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */,
+				ED032CB81A6E9AD800E37639 /* PIAPIEnvironmentManager */,
+				ED032C921A6E9A9400E37639 /* Supporting Files */,
+			);
+			path = PIAPIEnvironmentManager;
+			sourceTree = "<group>";
+		};
+		ED032C921A6E9A9400E37639 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED032C931A6E9A9400E37639 /* Info.plist */,
+				ED032C941A6E9A9400E37639 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED032CAB1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */,
+				ED032CAC1A6E9A9400E37639 /* Supporting Files */,
+			);
+			path = PIAPIEnvironmentManagerTests;
+			sourceTree = "<group>";
+		};
+		ED032CAC1A6E9A9400E37639 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED032CAD1A6E9A9400E37639 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED032CB81A6E9AD800E37639 /* PIAPIEnvironmentManager */ = {
+			isa = PBXGroup;
+			children = (
+				ED032CB91A6E9AED00E37639 /* PIAPIEnvironment.h */,
+				ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */,
+				ED032CBB1A6E9AED00E37639 /* PIAPIEnvironmentManager.h */,
+				ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */,
+				ED05E5CF1A74239400835133 /* PIAPIEnvironmentViewController.h */,
+				ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */,
+				ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */,
+			);
+			name = PIAPIEnvironmentManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED032C8E1A6E9A9400E37639 /* PIAPIEnvironmentManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED032CB21A6E9A9400E37639 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager" */;
+			buildPhases = (
+				ED032C8B1A6E9A9400E37639 /* Sources */,
+				ED032C8C1A6E9A9400E37639 /* Frameworks */,
+				ED032C8D1A6E9A9400E37639 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PIAPIEnvironmentManager;
+			productName = PIAPIEnvironmentManager;
+			productReference = ED032C8F1A6E9A9400E37639 /* PIAPIEnvironmentManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED032CA71A6E9A9400E37639 /* PIAPIEnvironmentManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED032CB51A6E9A9400E37639 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManagerTests" */;
+			buildPhases = (
+				ED032CA41A6E9A9400E37639 /* Sources */,
+				ED032CA51A6E9A9400E37639 /* Frameworks */,
+				ED032CA61A6E9A9400E37639 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED032CAA1A6E9A9400E37639 /* PBXTargetDependency */,
+			);
+			name = PIAPIEnvironmentManagerTests;
+			productName = PIAPIEnvironmentManagerTests;
+			productReference = ED032CA81A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED032C871A6E9A9400E37639 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Prolific Interactive";
+				TargetAttributes = {
+					ED032C8E1A6E9A9400E37639 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					ED032CA71A6E9A9400E37639 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = ED032C8E1A6E9A9400E37639;
+					};
+				};
+			};
+			buildConfigurationList = ED032C8A1A6E9A9400E37639 /* Build configuration list for PBXProject "PIAPIEnvironmentManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED032C861A6E9A9400E37639;
+			productRefGroup = ED032C901A6E9A9400E37639 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED032C8E1A6E9A9400E37639 /* PIAPIEnvironmentManager */,
+				ED032CA71A6E9A9400E37639 /* PIAPIEnvironmentManagerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED032C8D1A6E9A9400E37639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED032C9E1A6E9A9400E37639 /* Main.storyboard in Resources */,
+				ED032CA31A6E9A9400E37639 /* LaunchScreen.xib in Resources */,
+				ED05E5D31A74239400835133 /* PIAPIEnvironmentViewController.xib in Resources */,
+				ED032CA01A6E9A9400E37639 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED032CA61A6E9A9400E37639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED032C8B1A6E9A9400E37639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED032CC11A6E9AED00E37639 /* PIAPIEnvironmentManager.m in Sources */,
+				ED032C9B1A6E9A9400E37639 /* ViewController.m in Sources */,
+				ED032C981A6E9A9400E37639 /* AppDelegate.m in Sources */,
+				ED032C951A6E9A9400E37639 /* main.m in Sources */,
+				ED032CC01A6E9AED00E37639 /* PIAPIEnvironment.m in Sources */,
+				ED05E5D21A74239400835133 /* PIAPIEnvironmentViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED032CA41A6E9A9400E37639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED032CAF1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED032CAA1A6E9A9400E37639 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED032C8E1A6E9A9400E37639 /* PIAPIEnvironmentManager */;
+			targetProxy = ED032CA91A6E9A9400E37639 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ED032C9C1A6E9A9400E37639 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED032C9D1A6E9A9400E37639 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED032CA21A6E9A9400E37639 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ED032CB01A6E9A9400E37639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ED032CB11A6E9A9400E37639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ED032CB31A6E9A9400E37639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PIAPIEnvironmentManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ED032CB41A6E9A9400E37639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PIAPIEnvironmentManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ED032CB61A6E9A9400E37639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PIAPIEnvironmentManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIAPIEnvironmentManager.app/PIAPIEnvironmentManager";
+			};
+			name = Debug;
+		};
+		ED032CB71A6E9A9400E37639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PIAPIEnvironmentManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIAPIEnvironmentManager.app/PIAPIEnvironmentManager";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED032C8A1A6E9A9400E37639 /* Build configuration list for PBXProject "PIAPIEnvironmentManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED032CB01A6E9A9400E37639 /* Debug */,
+				ED032CB11A6E9A9400E37639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED032CB21A6E9A9400E37639 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED032CB31A6E9A9400E37639 /* Debug */,
+				ED032CB41A6E9A9400E37639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED032CB51A6E9A9400E37639 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED032CB61A6E9A9400E37639 /* Debug */,
+				ED032CB71A6E9A9400E37639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ED032C871A6E9A9400E37639 /* Project object */;
+}
