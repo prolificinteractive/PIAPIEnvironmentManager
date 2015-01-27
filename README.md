@@ -1,25 +1,22 @@
 # README #
 
-PiOS PIAPIEnvironmentManager POD
+### Summary ###
 
-### What is this repository for? ###
+PiOS PIAPIEnvironmentManager POD to help iOS Engineers manage API Environments
 
-* Pod to help iOS Engineers manage API Environments
-* v 1.0
+## Usage
 
-### How do I get set up? ###
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Requirements
 
-### Author ###
+## Installation
+
+PIAPIEnvironmentManager is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+    pod "PIAPIEnvironmentManager", '~> 0.1.0'
+
+## Author 
 
 * Julio , julio@prolificinteractive.com
-
-### License ###
-
-* PIAPIEnvironmentManager is available under the MIT license. See the LICENSE file for more info.
