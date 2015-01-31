@@ -28,3 +28,8 @@ Julio , julio@prolificinteractive.com
 * Editable URL in UI
 * Themable
 * Swift
+
+## License
+
+PIAPIEnvironmentManager is available under the MIT license. See the LICENSE file for more info.
+>>>>>>> ba192e59f18d72a473525d62824ece7df822d28f
