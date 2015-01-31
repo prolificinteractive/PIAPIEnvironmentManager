@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes'
   s.resource_bundles = {
-    'PIAPIEnvironmentManager' => ['Pod/Assets/*.png']
+    'PIAPIEnvironmentManager' => ['Pod/Assets/*.xib']
   }
 end

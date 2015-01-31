@@ -14,10 +14,7 @@
 		ED032CA01A6E9A9400E37639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED032C9F1A6E9A9400E37639 /* Images.xcassets */; };
 		ED032CA31A6E9A9400E37639 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */; };
 		ED032CAF1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */; };
-		ED032CC01A6E9AED00E37639 /* PIAPIEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */; };
-		ED032CC11A6E9AED00E37639 /* PIAPIEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */; };
-		ED05E5D21A74239400835133 /* PIAPIEnvironmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */; };
-		ED05E5D31A74239400835133 /* PIAPIEnvironmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */; };
+		EEE77916DDF71A2D4ECD67A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB3A16443FD374D62FDB02F /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C4B09BEF09B25480A3B76A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6C3E42319D7337E92C58A75C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6EB3A16443FD374D62FDB02F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED032C8F1A6E9A9400E37639 /* PIAPIEnvironmentManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PIAPIEnvironmentManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED032C931A6E9A9400E37639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED032C941A6E9A9400E37639 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,14 +44,7 @@
 		ED032CA81A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PIAPIEnvironmentManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED032CAD1A6E9A9400E37639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentManagerTests.m; sourceTree = "<group>"; };
-		ED032CB91A6E9AED00E37639 /* PIAPIEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironment.h; path = PIAPIEnvironmentManager/PIAPIEnvironment.h; sourceTree = "<group>"; };
-		ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironment.m; path = PIAPIEnvironmentManager/PIAPIEnvironment.m; sourceTree = "<group>"; };
-		ED032CBB1A6E9AED00E37639 /* PIAPIEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironmentManager.h; path = PIAPIEnvironmentManager/PIAPIEnvironmentManager.h; sourceTree = "<group>"; };
-		ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironmentManager.m; path = PIAPIEnvironmentManager/PIAPIEnvironmentManager.m; sourceTree = "<group>"; };
 		ED05E5CA1A73FB9800835133 /* PIAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIAPIConstants.h; sourceTree = "<group>"; };
-		ED05E5CF1A74239400835133 /* PIAPIEnvironmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIAPIEnvironmentViewController.h; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.h; sourceTree = "<group>"; };
-		ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIAPIEnvironmentViewController.m; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.m; sourceTree = "<group>"; };
-		ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PIAPIEnvironmentViewController.xib; path = PIAPIEnvironmentManager/PIAPIEnvironmentViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE77916DDF71A2D4ECD67A6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +66,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FE7F0FFE2B16B69DF118267 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EB3A16443FD374D62FDB02F /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ED032C861A6E9A9400E37639 = {
 			isa = PBXGroup;
 			children = (
 				ED032C911A6E9A9400E37639 /* PIAPIEnvironmentManager */,
 				ED032CAB1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests */,
 				ED032C901A6E9A9400E37639 /* Products */,
+				EF497F884B6533FE5DE59EB0 /* Pods */,
+				6FE7F0FFE2B16B69DF118267 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,7 +105,6 @@
 				ED032C9C1A6E9A9400E37639 /* Main.storyboard */,
 				ED032C9F1A6E9A9400E37639 /* Images.xcassets */,
 				ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */,
-				ED032CB81A6E9AD800E37639 /* PIAPIEnvironmentManager */,
 				ED032C921A6E9A9400E37639 /* Supporting Files */,
 			);
 			path = PIAPIEnvironmentManager;
@@ -133,18 +136,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		ED032CB81A6E9AD800E37639 /* PIAPIEnvironmentManager */ = {
+		EF497F884B6533FE5DE59EB0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ED032CB91A6E9AED00E37639 /* PIAPIEnvironment.h */,
-				ED032CBA1A6E9AED00E37639 /* PIAPIEnvironment.m */,
-				ED032CBB1A6E9AED00E37639 /* PIAPIEnvironmentManager.h */,
-				ED032CBC1A6E9AED00E37639 /* PIAPIEnvironmentManager.m */,
-				ED05E5CF1A74239400835133 /* PIAPIEnvironmentViewController.h */,
-				ED05E5D01A74239400835133 /* PIAPIEnvironmentViewController.m */,
-				ED05E5D11A74239400835133 /* PIAPIEnvironmentViewController.xib */,
+				0C4B09BEF09B25480A3B76A5 /* Pods.debug.xcconfig */,
+				6C3E42319D7337E92C58A75C /* Pods.release.xcconfig */,
 			);
-			name = PIAPIEnvironmentManager;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,9 +152,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED032CB21A6E9A9400E37639 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager" */;
 			buildPhases = (
+				D9A5DAF81B0688565B2F3565 /* Check Pods Manifest.lock */,
 				ED032C8B1A6E9A9400E37639 /* Sources */,
 				ED032C8C1A6E9A9400E37639 /* Frameworks */,
 				ED032C8D1A6E9A9400E37639 /* Resources */,
+				C099FC8619E2C9FD9B01149E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,7 +229,6 @@
 			files = (
 				ED032C9E1A6E9A9400E37639 /* Main.storyboard in Resources */,
 				ED032CA31A6E9A9400E37639 /* LaunchScreen.xib in Resources */,
-				ED05E5D31A74239400835133 /* PIAPIEnvironmentViewController.xib in Resources */,
 				ED032CA01A6E9A9400E37639 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,17 +242,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C099FC8619E2C9FD9B01149E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9A5DAF81B0688565B2F3565 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ED032C8B1A6E9A9400E37639 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED032CC11A6E9AED00E37639 /* PIAPIEnvironmentManager.m in Sources */,
 				ED032C9B1A6E9A9400E37639 /* ViewController.m in Sources */,
 				ED032C981A6E9A9400E37639 /* AppDelegate.m in Sources */,
 				ED032C951A6E9A9400E37639 /* main.m in Sources */,
-				ED032CC01A6E9AED00E37639 /* PIAPIEnvironment.m in Sources */,
-				ED05E5D21A74239400835133 /* PIAPIEnvironmentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +402,7 @@
 		};
 		ED032CB31A6E9A9400E37639 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C4B09BEF09B25480A3B76A5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PIAPIEnvironmentManager/Info.plist;
@@ -383,6 +413,7 @@
 		};
 		ED032CB41A6E9A9400E37639 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C3E42319D7337E92C58A75C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PIAPIEnvironmentManager/Info.plist;
