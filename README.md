@@ -1,10 +1,10 @@
 # README #
 
-![PIAPIEnvironmentManager](https://www.dropbox.com/s/k6lxr5ndz57wwjx/apienvironmentmanager.gif?raw=1)
-
 ## Summary 
 
 PiOS PIAPIEnvironmentManager POD to help iOS Engineers manage API Environments within their iOS app. Easily switch environments with the shake of your device and the current environment is retained, even after closing the app.
+
+![PIAPIEnvironmentManager](https://www.dropbox.com/s/k6lxr5ndz57wwjx/apienvironmentmanager.gif?raw=1)
 
 ## Usage
 
