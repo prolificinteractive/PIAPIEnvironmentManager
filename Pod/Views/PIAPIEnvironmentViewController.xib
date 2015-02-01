@@ -54,15 +54,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRC-Bk-FFY">
-                            <rect key="frame" x="259" y="93" width="51" height="31"/>
+                            <rect key="frame" x="259" y="81" width="51" height="31"/>
                             <connections>
                                 <action selector="environmentSwitchValueChanged:" destination="-1" eventType="valueChanged" id="eyt-7Z-0i7"/>
-                            </connections>
-                        </switch>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aob-Mj-wUd">
-                            <rect key="frame" x="259" y="155" width="51" height="31"/>
-                            <connections>
-                                <action selector="environmentSwitchValueChanged:" destination="-1" eventType="valueChanged" id="zHb-F5-Gec"/>
                             </connections>
                         </switch>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="development url" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-US-mQK" userLabel="staging url">
@@ -72,9 +66,15 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vP3-d8-CJt">
-                            <rect key="frame" x="259" y="31" width="51" height="31"/>
+                            <rect key="frame" x="259" y="19" width="51" height="31"/>
                             <connections>
                                 <action selector="environmentSwitchValueChanged:" destination="-1" eventType="valueChanged" id="Ygt-jK-7a1"/>
+                            </connections>
+                        </switch>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aob-Mj-wUd">
+                            <rect key="frame" x="259" y="143" width="51" height="31"/>
+                            <connections>
+                                <action selector="environmentSwitchValueChanged:" destination="-1" eventType="valueChanged" id="zHb-F5-Gec"/>
                             </connections>
                         </switch>
                     </subviews>
@@ -93,7 +93,9 @@
                         <constraint firstItem="52D-PR-t2B" firstAttribute="leading" secondItem="yoE-AE-vS0" secondAttribute="leading" constant="20" id="Eml-0D-uo9"/>
                         <constraint firstItem="RQw-18-o9z" firstAttribute="width" secondItem="jM7-kR-AlH" secondAttribute="width" id="Ld4-iH-PvC"/>
                         <constraint firstAttribute="height" constant="207" id="ObC-lp-zg6"/>
+                        <constraint firstItem="52D-PR-t2B" firstAttribute="top" secondItem="vP3-d8-CJt" secondAttribute="bottom" id="PiF-LM-0a2"/>
                         <constraint firstItem="jM7-kR-AlH" firstAttribute="top" secondItem="52D-PR-t2B" secondAttribute="bottom" constant="20" id="QDS-Oj-uWE"/>
+                        <constraint firstItem="rHb-US-mQK" firstAttribute="top" secondItem="aob-Mj-wUd" secondAttribute="bottom" id="Vq9-gK-G85"/>
                         <constraint firstItem="hRC-Bk-FFY" firstAttribute="centerY" secondItem="jM7-kR-AlH" secondAttribute="centerY" constant="11" id="a1x-e7-yCA"/>
                         <constraint firstItem="vP3-d8-CJt" firstAttribute="top" secondItem="yoE-AE-vS0" secondAttribute="top" constant="20" id="d6p-hN-fux"/>
                         <constraint firstAttribute="width" constant="320" id="dML-wJ-Zfj"/>
@@ -105,6 +107,7 @@
                         <constraint firstItem="RQw-18-o9z" firstAttribute="leading" secondItem="jM7-kR-AlH" secondAttribute="leading" id="h8O-LH-WTz"/>
                         <constraint firstItem="VZY-KC-gUM" firstAttribute="leading" secondItem="yoE-AE-vS0" secondAttribute="leading" constant="20" id="hM6-gC-dMZ"/>
                         <constraint firstItem="RQw-18-o9z" firstAttribute="top" secondItem="jM7-kR-AlH" secondAttribute="bottom" constant="18" id="jgh-cO-5Bx"/>
+                        <constraint firstItem="DnB-BK-LBm" firstAttribute="top" secondItem="hRC-Bk-FFY" secondAttribute="bottom" id="jhT-rS-bSn"/>
                         <constraint firstItem="aob-Mj-wUd" firstAttribute="leading" secondItem="hRC-Bk-FFY" secondAttribute="leading" id="kf2-yI-17A"/>
                         <constraint firstItem="VZY-KC-gUM" firstAttribute="top" secondItem="yoE-AE-vS0" secondAttribute="top" constant="25" id="kg4-h1-bqD"/>
                         <constraint firstAttribute="trailing" secondItem="vP3-d8-CJt" secondAttribute="trailing" constant="12" id="nVe-eY-pdc"/>
@@ -119,9 +122,12 @@
                         <mask key="constraints">
                             <exclude reference="rvj-0Z-qOM"/>
                             <exclude reference="jgh-cO-5Bx"/>
+                            <exclude reference="3Cv-z9-1cO"/>
                             <exclude reference="d6p-hN-fux"/>
+                            <exclude reference="a1x-e7-yCA"/>
                             <exclude reference="e6c-RR-CLs"/>
                             <exclude reference="vFJ-T5-ZxX"/>
+                            <exclude reference="66e-00-BAi"/>
                             <exclude reference="A6O-lN-bQQ"/>
                             <exclude reference="xgl-dV-fr0"/>
                         </mask>
