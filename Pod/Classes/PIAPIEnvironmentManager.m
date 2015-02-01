@@ -46,8 +46,12 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 
 - (PIAPIEnvironmentViewController *)environmentViewController {
     if (!_environmentViewController) {
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"];
+
+        NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+
         _environmentViewController = [[PIAPIEnvironmentViewController alloc] initWithNibName:NSStringFromClass([PIAPIEnvironmentViewController class])
-                                                                                      bundle:[NSBundle mainBundle]];
+                                                                                      bundle:bundle];
         _environmentViewController.delegate = self;
     }
     _environmentViewController.currentEnvironmentType = self.currentEnvironmentType;

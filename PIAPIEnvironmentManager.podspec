@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary          = "PiOS PIAPIEnvironmentManager pod to help Prolific iOS Engineers manage API Environments."
   s.description      = <<-DESC
                        PiOS PIAPIEnvironmentManager pod to help Prolific iOS Engineers manage API Environments.
-					   
+             
                        DESC
   s.homepage         = "https://bitbucket.org/juliorivera/piapienvironmentmanager"
   s.license          = 'MIT'
@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes'
   s.resource_bundles = {
-    'PIAPIEnvironmentManager' => ['Pod/Assets/*.xib']
+    'PIAPIEnvironmentManager' => ['Pod/Views/*.xib']
   }
 end
