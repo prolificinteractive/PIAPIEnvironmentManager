@@ -19,7 +19,8 @@
  *  @return Instance of PIAPIEnvironment with baseURL and environmentType
  */
 + (instancetype)environmentWithBaseURL:(NSURL *)baseURL
-                       environmentType:(PIAPIEnvironmentType)environmentType {
+                       environmentType:(PIAPIEnvironmentType)environmentType
+{
     return [self environmentWithBaseURL:baseURL
                         environmentType:environmentType
                         certificateName:nil];
@@ -27,7 +28,8 @@
 
 + (instancetype)environmentWithBaseURL:(NSURL *)baseURL
                        environmentType:(PIAPIEnvironmentType)environmentType
-                       certificateName:(NSString *)certificateName {
+                       certificateName:(NSString *)certificateName
+{
     // certificateName can be nil.
     if (certificateName) {
         NSString *fileType = [[[certificateName lastPathComponent] componentsSeparatedByString:@"."] lastObject];
@@ -41,7 +43,8 @@
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
                 environmentType:(PIAPIEnvironmentType)environmentType
-                certificateName:(NSString *)certificateName {
+                certificateName:(NSString *)certificateName
+{
     self = [super init];
     if (self) {
         _baseURL = baseURL;
@@ -53,24 +56,29 @@
     return self;
 }
 
-- (id <AFURLRequestSerialization> )requestSerializer {
+- (id <AFURLRequestSerialization> )requestSerializer
+{
     return [AFJSONRequestSerializer serializer];
 }
 
-- (id <AFURLResponseSerialization> )responseSerializer {
+- (id <AFURLResponseSerialization> )responseSerializer
+{
     return [AFJSONResponseSerializer serializer];
 }
 
-- (void)authenticateRequest:(NSURLRequest *)request {
+- (void)authenticateRequest:(NSURLRequest *)request
+{
     // Override in subclass
 }
 
-- (NSError *)errorForResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject {
+- (NSError *)errorForResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject
+{
     // Override in subclass
     return nil;
 }
 
-- (void)responseDidSucceed:(NSHTTPURLResponse *)response responseObject:(id)responseObject {
+- (void)responseDidSucceed:(NSHTTPURLResponse *)response responseObject:(id)responseObject
+{
     // Override in subclass
 }
 

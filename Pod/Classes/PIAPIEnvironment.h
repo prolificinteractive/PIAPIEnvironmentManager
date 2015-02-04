@@ -66,7 +66,7 @@ typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
  * Override the request and response serialization behavior
  * Defaults to AFJSONRequestSerializer/AFJSONResponseSerializer
  */
-- (id <AFURLRequestSerialization> )requestSerializer;
+- (id <AFURLRequestSerialization> ) requestSerializer;
 - (id <AFURLResponseSerialization> )responseSerializer;
 
 /**
