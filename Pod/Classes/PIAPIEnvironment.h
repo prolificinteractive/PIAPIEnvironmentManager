@@ -42,18 +42,32 @@ typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
  *
  *  @return Instance of PIAPIEnvironment with baseURL and environmentType
  */
-+ (instancetype)environmentWithBaseURL:(NSURL *)baseURL environmentType:(PIAPIEnvironmentType)environmentType;
++ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
+                       environmentType:(PIAPIEnvironmentType)environmentType;
+
+/**
+ *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType
+ *
+ *  @param baseURL         NSURL of environment, ie: http://environment.com
+ *  @param environmentType PIAPIEnvironmentType of environment
+ *  @param certificateName Certificate name. Optional. Can be nil. The certificate must be a .cer format.
+ *
+ *  @return Instance of PIAPIEnvironment with baseURL and environmentType
+ */
++ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
+                       environmentType:(PIAPIEnvironmentType)environmentType
+                       certificateName:(NSString *)certificateName;
 
 @property (nonatomic, readonly) PIAPIEnvironmentType environmentType;
 @property (nonatomic, readonly) NSURL *baseURL;
-
+@property (nonatomic, readonly) NSData *certificateData;
 
 /**
  * Override the request and response serialization behavior
  * Defaults to AFJSONRequestSerializer/AFJSONResponseSerializer
  */
-- (id <AFURLRequestSerialization>)requestSerializer;
-- (id <AFURLResponseSerialization>)responseSerializer;
+- (id <AFURLRequestSerialization> )requestSerializer;
+- (id <AFURLResponseSerialization> )responseSerializer;
 
 /**
  * Handle any kind of API-specific request authorization
