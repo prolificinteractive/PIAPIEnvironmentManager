@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFNetworking.h>
 
 /**
  *  Environment Types currently supported
@@ -17,6 +18,10 @@ typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
      *  Development Environment
      */
     PIAPIEnvironmentTypeDEV = 0,
+    /**
+     *  STAGING Environment
+     */
+    PIAPIEnvironmentTypeSTAGING,
     /**
      *  QA Environment
      */
@@ -41,5 +46,39 @@ typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
 
 @property (nonatomic, readonly) PIAPIEnvironmentType environmentType;
 @property (nonatomic, readonly) NSURL *baseURL;
+
+
+/**
+ * Override the request and response serialization behavior
+ * Defaults to AFJSONRequestSerializer/AFJSONResponseSerializer
+ */
+- (id <AFURLRequestSerialization>)requestSerializer;
+- (id <AFURLResponseSerialization>)responseSerializer;
+
+/**
+ * Handle any kind of API-specific request authorization
+ *  OAuth, basic auth, sessionID, etc
+ *
+ * @param request NSURLRequest to be authenticated
+ */
+- (void)authenticateRequest:(NSMutableURLRequest *)request;
+
+/**
+ * Check the response for an error and return it if there is one
+ *
+ * @param response  NSHTTPURLResponse from API
+ * @param id        responseObject JSON object returned from API
+ *
+ * @return NSError or nil
+ */
+- (NSError *)errorForResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject;
+
+/**
+ * Handle any cleanup from the request (e.g. saving tokens, etc)
+ *
+ * @param response  NSHTTPURLResponse from API
+ * @param id        responseObject JSON object returned from API
+ */
+- (void)responseDidSucceed:(NSHTTPURLResponse *)response responseObject:(id)responseObject;
 
 @end
