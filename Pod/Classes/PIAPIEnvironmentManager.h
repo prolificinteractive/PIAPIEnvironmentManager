@@ -31,7 +31,8 @@
 
 @property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
 @property (nonatomic, assign) PIAPIEnvironmentType defaultEnvironmentType;
-@property (nonatomic, strong) NSURL *currentEnvironmentURL;
+@property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readonly) NSURL *currentEnvironmentURL;
 
 /**
  *  Add a environment to the manager, should be of one type for each DEV, QA, PROD

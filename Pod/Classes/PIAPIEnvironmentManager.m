@@ -81,8 +81,13 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     }
 }
 
+- (PIAPIEnvironment *)currentEnvironment
+{
+    return [self environmentForEnvironmentType:self.currentEnvironmentType];
+}
+
 - (NSURL *)currentEnvironmentURL {
-    return [self baseURLForEnvironmentType:self.currentEnvironmentType];
+    return self.currentEnvironment.baseURL;
 }
 
 #pragma mark - Public Methods
@@ -95,14 +100,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
                                completion:completion];
 }
 
-- (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType {
-    NSURL *url;
+- (PIAPIEnvironment *)environmentForEnvironmentType:(PIAPIEnvironmentType)environmentType
+{
     for (PIAPIEnvironment *environment in self.environments) {
         if (environment.environmentType == environmentType) {
-            url = environment.baseURL;
+            return environment;
         }
     }
-    return url;
+    return nil;
 }
 
 #pragma mark - Private Methods
