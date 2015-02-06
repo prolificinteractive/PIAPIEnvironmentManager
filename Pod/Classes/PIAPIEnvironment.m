@@ -19,27 +19,49 @@
  *  @return Instance of PIAPIEnvironment with baseURL and environmentType
  */
 + (instancetype)environmentWithBaseURL:(NSURL *)baseURL
-                       environmentType:(PIAPIEnvironmentType)environmentType {
+                       environmentType:(PIAPIEnvironmentType)environmentType
+{
+    return [self environmentWithBaseURL:baseURL
+                        environmentType:environmentType
+                        certificateName:nil];
+}
+
++ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
+                       environmentType:(PIAPIEnvironmentType)environmentType
+                       certificateName:(NSString *)certificateName
+{
+    // certificateName can be nil.
+    if (certificateName) {
+        NSString *fileType = [[[certificateName lastPathComponent] componentsSeparatedByString:@"."] lastObject];
+        NSAssert([fileType isEqualToString:@"cer"], @"Certificate file must be a .cer format");
+    }
+
     return [[self alloc] initWithBaseURL:baseURL
-                         environmentType:environmentType];
+                         environmentType:environmentType
+                         certificateName:certificateName];
 }
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
-                environmentType:(PIAPIEnvironmentType)environmentType {
+                environmentType:(PIAPIEnvironmentType)environmentType
+                certificateName:(NSString *)certificateName
+{
     self = [super init];
     if (self) {
         _baseURL = baseURL;
         _environmentType = environmentType;
+        if (certificateName) {
+            _certificateData = [NSData dataWithContentsOfFile:certificateName];
+        }
     }
     return self;
 }
 
-- (id <AFURLRequestSerialization>)requestSerializer
+- (id <AFURLRequestSerialization> )requestSerializer
 {
     return [AFJSONRequestSerializer serializer];
 }
 
-- (id <AFURLResponseSerialization>)responseSerializer
+- (id <AFURLResponseSerialization> )responseSerializer
 {
     return [AFJSONResponseSerializer serializer];
 }
