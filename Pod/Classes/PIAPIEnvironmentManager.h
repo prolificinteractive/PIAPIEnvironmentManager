@@ -10,6 +10,13 @@
 #import <UIKit/UIKit.h>
 #import "PIAPIEnvironment.h"
 
+/**
+ * User defaults key for API Environment
+ * To include environment switching in the Settings bundle, add an item with this key
+ * Make sure items are numbered according to the enum defined in PIAPIEnvironment.h
+ */
+static NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier = @"PIAPIEnvironmentType";
+
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
 @required

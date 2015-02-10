@@ -11,8 +11,6 @@
 #import "PIAPIEnvironment.h"
 
 
-static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManager";
-
 @interface PIAPIEnvironmentManager () <PIAPIEnvironmentViewDelegate> {
     PIAPIEnvironmentType _currentEnvironmentType;
 }
@@ -38,8 +36,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     self = [super init];
     if (self) {
         self.environments = [NSMutableArray new];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSUserDefaultsDidChangeNotification object:nil];
 }
 
 #pragma mark - Custom Accessors
@@ -60,24 +64,35 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 
 - (PIAPIEnvironmentType)currentEnvironmentType {
     if (!_currentEnvironmentType) {
-        _currentEnvironmentType = [[[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentManagerIdentifier] integerValue];
+        _currentEnvironmentType = [self environmentTypeFromUserDefaults];
     }
     return _currentEnvironmentType;
 }
 
-- (void)setCurrentEnvironmentType:(PIAPIEnvironmentType)currentEnvironmentType {
-    _currentEnvironmentType = currentEnvironmentType;
-    [[NSUserDefaults standardUserDefaults] setObject:@(currentEnvironmentType)
-                                              forKey:kAPIEnvironmentManagerIdentifier];
+- (void)setCurrentEnvironmentType:(PIAPIEnvironmentType)environmentType {
+    
+    if (_currentEnvironmentType == environmentType) {
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
+        [self.delegate environmentManagerWillChangeEnvironment:environmentType];
+    }
+    
+    _currentEnvironmentType = environmentType;
+    [self setUserDefaultsEnvironmentType:environmentType];
+    
+    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
+        [self.delegate environmentManagerDidChangeEnvironment:environmentType];
+    }
 }
 
 - (void)setDefaultEnvironmentType:(PIAPIEnvironmentType)environmentType {
     _defaultEnvironmentType = environmentType;
 
     //The defaultEnvironmentType is not saved if we have a stored environment to remember last environment
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentManagerIdentifier]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(environmentType)
-                                                  forKey:kAPIEnvironmentManagerIdentifier];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentTypeUserDefaultsIdentifier]) {
+        [self setUserDefaultsEnvironmentType:environmentType];
     }
 }
 
@@ -90,6 +105,19 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     return self.currentEnvironment.baseURL;
 }
 
+#pragma mark - User Defaults
+- (PIAPIEnvironmentType)environmentTypeFromUserDefaults
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentTypeUserDefaultsIdentifier] integerValue];
+}
+
+- (void)setUserDefaultsEnvironmentType:(PIAPIEnvironmentType)environmentType
+{
+    if ([self environmentTypeFromUserDefaults] != environmentType) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(environmentType)
+                                                  forKey:kAPIEnvironmentTypeUserDefaultsIdentifier];
+    }
+}
 #pragma mark - Public Methods
 
 - (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
@@ -110,6 +138,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     return nil;
 }
 
+#pragma mark - Notifications
+
+- (void)userDefaultsDidChange
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.currentEnvironmentType = [self environmentTypeFromUserDefaults];
+}
+
 #pragma mark - Private Methods
 
 - (void)addEnvironment:(PIAPIEnvironment *)environment {
@@ -118,18 +154,8 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 
-- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironmentType)environmentType {
-    [self.delegate environmentManagerWillChangeEnvironment:environmentType];
-}
-
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironmentType)environmentType {
-    if (self.currentEnvironmentType != environmentType) {
-        self.currentEnvironmentType = environmentType;
-    }
-
-    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
-        [self.delegate environmentManagerDidChangeEnvironment:environmentType];
-    }
+    self.currentEnvironmentType = environmentType;
 }
 
 @end

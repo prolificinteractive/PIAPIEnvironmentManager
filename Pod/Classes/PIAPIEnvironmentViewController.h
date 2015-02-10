@@ -12,7 +12,6 @@
 @protocol PIAPIEnvironmentViewDelegate <NSObject>
 
 @required
-- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
 
 @end
