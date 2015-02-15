@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PIAPIConstants.h"
-#import "PIAPIEnvironmentManager.h"
+#import <PIAPIEnvironmentManager/PIAPIEnvironmentManager.h>
 
 @implementation AppDelegate
 
