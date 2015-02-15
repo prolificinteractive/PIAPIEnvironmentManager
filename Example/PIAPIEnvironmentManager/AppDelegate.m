@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PIAPIConstants.h"
-#import <PIAPIEnvironmentManager/PIAPIEnvironmentManager.h>
+#import "PIAPIEnvironmentManager.h"
 
 @implementation AppDelegate
 
@@ -33,6 +33,8 @@
 
     //set default environment
     [PIAPIEnvironmentManager sharedManager].defaultEnvironmentType = PIAPIEnvironmentTypeDEV;
+
+    [[PIAPIEnvironmentManager sharedManager] setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
 }
 
 @end

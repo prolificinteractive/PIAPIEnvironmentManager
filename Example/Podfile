@@ -1,4 +1,6 @@
 platform :ios, '7.0'
 
+source 'ssh://git@bitbucket.org/prolificinteractive/pibrary-ios.git'
+
 #Pods list
-pod 'PIAPIEnvironmentManager', :git => "git@bitbucket.org:prolificinteractive/piapienvironmentmanager.git"
+pod 'PIAPIEnvironmentManager'
