@@ -35,7 +35,8 @@
 
 @property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
 @property (nonatomic, assign) PIAPIEnvironmentType defaultEnvironmentType;
-@property (nonatomic, strong) NSURL *currentEnvironmentURL;
+@property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readonly) NSURL *currentEnvironmentURL;
 
 /**
  *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
