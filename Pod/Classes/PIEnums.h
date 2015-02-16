@@ -15,6 +15,10 @@ typedef enum PIAPIEnvironmentType {
      */
     PIAPIEnvironmentTypeDEV,
     /**
+     *  STAGING Environment
+     */
+    PIAPIEnvironmentTypeSTAGING,
+    /**
      *  QA Environment
      */
     PIAPIEnvironmentTypeQA,
@@ -36,6 +40,8 @@ typedef enum PIAPIEnvironmentInvokeEvent {
      *  Shaking the device will present the environment view controller
      */
     PIAPIEnvironmentInvokeEventShake,
-    //  Swiping two fingers left while in any screen will present the environment view controller
+    /*
+     *  Swiping two fingers left while in any screen will present the environment view controller
+     */
     PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft,
 } PIAPIEnvironmentInvokeEvent;
