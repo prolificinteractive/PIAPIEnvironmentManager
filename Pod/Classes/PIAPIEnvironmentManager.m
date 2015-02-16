@@ -10,6 +10,7 @@
 #import "PIAPIEnvironmentViewController.h"
 #import "PIAPIEnvironment.h"
 
+NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier = @"PIAPIEnvironmentType";
 
 @interface PIAPIEnvironmentManager () <PIAPIEnvironmentViewDelegate> {
     PIAPIEnvironmentType _currentEnvironmentType;
