@@ -22,6 +22,8 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 @property (nonatomic, strong) UINavigationController *environmentViewNavController;
 @property (nonatomic, strong) PIAPIEnvironmentViewController *environmentViewController;
 @property (nonatomic, assign) PIAPIEnvironmentType currentEnvironmentType;
+
+@property (nonatomic, strong) UIWindow *environmentWindow;
 @property (nonatomic, weak) UIWindow *mainWindow;
 
 @end
@@ -49,9 +51,20 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 
 - (UIWindow *)mainWindow {
     if (!_mainWindow) {
-        _mainWindow = [[[UIApplication sharedApplication] delegate] window];
+         _mainWindow = [[[UIApplication sharedApplication] delegate] window];
     }
     return _mainWindow;
+}
+
+- (UIWindow *)environmentWindow
+{
+    if (!_environmentWindow) {
+        _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [_environmentWindow setWindowLevel:UIWindowLevelNormal];
+        [_environmentWindow addSubview:self.environmentViewNavController.view];
+    }
+    [_environmentWindow makeKeyAndVisible];
+    return _environmentWindow;
 }
 
 - (UINavigationController *)environmentViewNavController {
@@ -104,8 +117,13 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 }
 
 - (NSURL *)currentEnvironmentURL {
-    return self.currentEnvironment.baseURL;
+    NSURL *currentURL = self.currentEnvironment.baseURL;
+    if (!currentURL) {
+        currentURL = [self baseURLForEnvironmentType:self.defaultEnvironmentType];
+    }
+    return currentURL;
 }
+
 #pragma mark - Public Methods
 
 - (PIAPIEnvironment *)environmentForEnvironmentType:(PIAPIEnvironmentType)environmentType
@@ -149,29 +167,28 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 #pragma mark - Private Methods
 
 - (void)showEnvironmentView {
-    CGRect mainWindowFrame = self.mainWindow.frame;
-    CGRect originalFrame = mainWindowFrame;
-    mainWindowFrame.origin.y += mainWindowFrame.size.height;
-    self.environmentViewNavController.view.frame = mainWindowFrame;
-    [self.mainWindow addSubview:self.environmentViewNavController.view];
+    CGRect originalFrame = self.environmentWindow.frame;
+    originalFrame.origin.y += originalFrame.size.height;
+    self.environmentViewNavController.view.frame = originalFrame;
+
     [UIView animateWithDuration:0.25f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations: ^{
-                         self.environmentViewNavController.view.frame = originalFrame;
+                         self.environmentViewNavController.view.frame = _environmentWindow.frame;
                      } completion:nil];
 }
 
 - (void)dismissEnvironmentView {
-    CGRect animatedFrame = self.mainWindow.frame;
-    animatedFrame.origin.y += self.mainWindow.frame.size.height;
+    CGRect animatedFrame = self.environmentWindow.frame;
+    animatedFrame.origin.y += self.environmentWindow.frame.size.height;
     [UIView animateWithDuration:0.25f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations: ^{
                          self.environmentViewNavController.view.frame = animatedFrame;
                      } completion: ^(BOOL finished) {
-                         [self.environmentViewNavController.view removeFromSuperview];
+                         self.environmentWindow.hidden = YES;
                      }];
 }
 
