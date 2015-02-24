@@ -8,6 +8,7 @@
 
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentViewController.h"
+#import "PIAPIEnvironmentNavigationController.h"
 #import "PIAPIEnvironment.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
@@ -19,7 +20,7 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 }
 
 @property (nonatomic, strong) NSMutableArray *environments;
-@property (nonatomic, strong) UINavigationController *environmentViewNavController;
+@property (nonatomic, strong) PIAPIEnvironmentNavigationController *environmentViewNavController;
 @property (nonatomic, strong) PIAPIEnvironmentViewController *environmentViewController;
 @property (nonatomic, assign) PIAPIEnvironmentType currentEnvironmentType;
 
@@ -61,15 +62,16 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     if (!_environmentWindow) {
         _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [_environmentWindow setWindowLevel:UIWindowLevelNormal];
+        _environmentWindow.rootViewController = self.environmentViewNavController;
         [_environmentWindow addSubview:self.environmentViewNavController.view];
     }
     [_environmentWindow makeKeyAndVisible];
     return _environmentWindow;
 }
 
-- (UINavigationController *)environmentViewNavController {
+- (PIAPIEnvironmentNavigationController *)environmentViewNavController {
     if (!_environmentViewNavController) {
-        _environmentViewNavController = [[UINavigationController alloc] initWithRootViewController:self.environmentViewController];
+        _environmentViewNavController = [[PIAPIEnvironmentNavigationController alloc] initWithRootViewController:self.environmentViewController];
     }
     return _environmentViewNavController;
 }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
-#import "PIEnums.h"
+#import "PIAPIEnvironmentEnums.h"
 
 @interface PIAPIEnvironment : NSObject
 

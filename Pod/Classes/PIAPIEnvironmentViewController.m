@@ -9,7 +9,7 @@
 #import "PIAPIEnvironmentViewController.h"
 #import "PIAPIEnvironment.h"
 #import "PIAPIEnvironmentManager.h"
-#import "PIEnums.h"
+#import "PIAPIEnvironmentEnums.h"
 
 @interface PIAPIEnvironmentViewController ()
 

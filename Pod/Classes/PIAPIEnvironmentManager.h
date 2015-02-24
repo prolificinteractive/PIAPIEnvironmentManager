@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "PIEnums.h"
+#import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironment.h"
 
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
