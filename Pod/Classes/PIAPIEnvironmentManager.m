@@ -8,8 +8,10 @@
 
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentViewController.h"
+#import "PIAPIEnvironmentNavigationController.h"
 #import "PIAPIEnvironment.h"
-
+#import <objc/runtime.h>
+#import <objc/message.h>
 
 static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManager";
 
@@ -18,8 +20,12 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 }
 
 @property (nonatomic, strong) NSMutableArray *environments;
+@property (nonatomic, strong) PIAPIEnvironmentNavigationController *environmentViewNavController;
 @property (nonatomic, strong) PIAPIEnvironmentViewController *environmentViewController;
 @property (nonatomic, assign) PIAPIEnvironmentType currentEnvironmentType;
+
+@property (nonatomic, strong) UIWindow *environmentWindow;
+@property (nonatomic, weak) UIWindow *mainWindow;
 
 @end
 
@@ -43,6 +49,32 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 }
 
 #pragma mark - Custom Accessors
+
+- (UIWindow *)mainWindow {
+    if (!_mainWindow) {
+         _mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    }
+    return _mainWindow;
+}
+
+- (UIWindow *)environmentWindow
+{
+    if (!_environmentWindow) {
+        _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [_environmentWindow setWindowLevel:UIWindowLevelNormal];
+        _environmentWindow.rootViewController = self.environmentViewNavController;
+        [_environmentWindow addSubview:self.environmentViewNavController.view];
+    }
+    [_environmentWindow makeKeyAndVisible];
+    return _environmentWindow;
+}
+
+- (PIAPIEnvironmentNavigationController *)environmentViewNavController {
+    if (!_environmentViewNavController) {
+        _environmentViewNavController = [[PIAPIEnvironmentNavigationController alloc] initWithRootViewController:self.environmentViewController];
+    }
+    return _environmentViewNavController;
+}
 
 - (PIAPIEnvironmentViewController *)environmentViewController {
     if (!_environmentViewController) {
@@ -87,18 +119,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 }
 
 - (NSURL *)currentEnvironmentURL {
-    return self.currentEnvironment.baseURL;
+    NSURL *currentURL = self.currentEnvironment.baseURL;
+    if (!currentURL) {
+        currentURL = [self baseURLForEnvironmentType:self.defaultEnvironmentType];
+    }
+    return currentURL;
 }
 
 #pragma mark - Public Methods
-
-- (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
-                                                animated:(BOOL)animated
-                                              completion:(void (^)(void))completion {
-    [viewController presentViewController:[[UINavigationController alloc] initWithRootViewController:self.environmentViewController]
-                                 animated:animated
-                               completion:completion];
-}
 
 - (PIAPIEnvironment *)environmentForEnvironmentType:(PIAPIEnvironmentType)environmentType
 {
@@ -110,7 +138,61 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     return nil;
 }
 
+- (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType {
+    NSURL *url;
+    for (PIAPIEnvironment *environment in self.environments) {
+        if (environment.environmentType == environmentType) {
+            url = environment.baseURL;
+        }
+    }
+    return url;
+}
+
+- (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent {
+    if (invokeEvent == PIAPIEnvironmentInvokeEventShake) {
+        __block IMP originalIMP = PIReplaceMethodWithBlock([UIWindow class], @selector(motionEnded:withEvent:), ^(UIWindow *_self, UIEventSubtype motion, UIEvent *event) {
+            if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake) {
+                [self showEnvironmentView];
+            }
+
+            ((void (*)(id, SEL, UIEventSubtype, UIEvent *))originalIMP)(_self, @selector(motionEnded:withEvent:), motion, event);
+        });
+    }
+    else if (invokeEvent == PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft) {
+        UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showEnvironmentView)];
+        swipeGesture.numberOfTouchesRequired = 2;
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self.mainWindow addGestureRecognizer:swipeGesture];
+    }
+}
+
 #pragma mark - Private Methods
+
+- (void)showEnvironmentView {
+    CGRect originalFrame = self.environmentWindow.frame;
+    originalFrame.origin.y += originalFrame.size.height;
+    self.environmentViewNavController.view.frame = originalFrame;
+
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations: ^{
+                         self.environmentViewNavController.view.frame = _environmentWindow.frame;
+                     } completion:nil];
+}
+
+- (void)dismissEnvironmentView {
+    CGRect animatedFrame = self.environmentWindow.frame;
+    animatedFrame.origin.y += self.environmentWindow.frame.size.height;
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations: ^{
+                         self.environmentViewNavController.view.frame = animatedFrame;
+                     } completion: ^(BOOL finished) {
+                         self.environmentWindow.hidden = YES;
+                     }];
+}
 
 - (void)addEnvironment:(PIAPIEnvironment *)environment {
     [self.environments addObject:environment];
@@ -129,6 +211,39 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
 
     if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
         [self.delegate environmentManagerDidChangeEnvironment:environmentType];
+    }
+}
+
+- (void)environmentViewDoneButtonPressed:(id)sender {
+    [self dismissEnvironmentView];
+}
+
+#pragma mark - Swizzled Methods
+
+/**
+ *  Method to use for swizzling
+ *  Reference: http://petersteinberger.com/blog/2014/a-story-about-swizzling-the-right-way-and-touch-forwarding/
+ *
+ *  @param aClass  Class that will be overriding the original selector
+ *  @param origSEL original selector that will be overiding
+ *  @param block   Block to trigger in place of original selector
+ */
+static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block) {
+    NSCParameterAssert(block);
+
+    // get original method
+    Method origMethod = class_getInstanceMethod(aClass, origSEL);
+    NSCParameterAssert(origMethod);
+
+    // convert block to IMP trampoline and replace method implementation
+    IMP newIMP = imp_implementationWithBlock(block);
+
+    // Try adding the method if not yet in the current class
+    if (!class_addMethod(aClass, origSEL, newIMP, method_getTypeEncoding(origMethod))) {
+        return method_setImplementation(origMethod, newIMP);
+    }
+    else {
+        return method_getImplementation(origMethod);
     }
 }
 

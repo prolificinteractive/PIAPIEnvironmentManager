@@ -8,19 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironment.h"
 
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
-@required
+@optional
 /**
- *  Required b/c it is mandatory that the session is reset before environments are changed for testing
+ *  Method called when the PIAPIEnvironmentManager will change the environment
  *
  *  @param environmentType The PIAPIEnvironmentType that is about to be changed
  */
 - (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
-
-@optional
+/**
+ *  Method called when the PIAPIEnvironmentManager did change the environment
+ *
+ *  @param environmentType The PIAPIEnvironmentType that was changed too
+ */
 - (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
 
 @end
@@ -35,24 +39,19 @@
 @property (nonatomic, readonly) NSURL *currentEnvironmentURL;
 
 /**
+ *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
+ *
+ *  @param invokeEvent PIAPIEnvironmentInvokeEvent that will be triggered
+ */
+- (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
+
+/**
  *  Add a environment to the manager, should be of one type for each DEV, QA, PROD
  *  Should be called in the your app delegate. (See example project)
  *
  *  @param environment PIAPIEnvironment to set
  */
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
-
-/**
- *  Method to present the UI to change the current environment.
- *  Recommended that this is implemented via the shake feature. (See example project)
- *
- *  @param viewController UIViewController that is presenting the Environment View Controller
- *  @param animated       BOOL of whether the Environment View Controller should be presented with animation
- *  @param completion     The block to execute after the presentation finishes.
- */
-- (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
-                                                animated:(BOOL)animated
-                                              completion:(void (^)(void))completion;
 
 /**
  *  Returns the baseURL for the specified PIAPIEnvironmentType

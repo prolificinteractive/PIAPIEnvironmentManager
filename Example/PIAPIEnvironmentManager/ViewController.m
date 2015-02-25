@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "PIAPIEnvironmentManager.h"
+#import <PIAPIEnvironmentManager/PIAPIEnvironmentManager.h>
 
 @interface ViewController () <PIAPIEnvironmentManagerDelegate>
 
@@ -16,17 +16,6 @@
 @end
 
 @implementation ViewController
-
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    [PIAPIEnvironmentManager sharedManager].delegate = self;
-    [[PIAPIEnvironmentManager sharedManager] presentEnvironmentViewControllerInViewController:self
-                                                                                     animated:YES
-                                                                                   completion:nil];
-}
-
-- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironmentType)environmentType {
-#warning Clear session data
-}
 
 - (IBAction)updateURLButtonPressed:(id)sender {
     self.currentURLLabel.text = [[PIAPIEnvironmentManager sharedManager].currentEnvironmentURL absoluteString];

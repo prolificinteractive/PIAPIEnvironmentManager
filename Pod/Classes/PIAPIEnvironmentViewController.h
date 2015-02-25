@@ -14,6 +14,7 @@
 @required
 - (void)environmentViewWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentViewDoneButtonPressed:(id)sender;
 
 @end
 

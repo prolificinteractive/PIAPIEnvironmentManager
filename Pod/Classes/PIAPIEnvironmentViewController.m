@@ -9,6 +9,7 @@
 #import "PIAPIEnvironmentViewController.h"
 #import "PIAPIEnvironment.h"
 #import "PIAPIEnvironmentManager.h"
+#import "PIAPIEnvironmentEnums.h"
 
 @interface PIAPIEnvironmentViewController ()
 
@@ -59,7 +60,9 @@
 #pragma mark - Action Methods
 
 - (void)doneButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.delegate respondsToSelector:@selector(environmentViewDoneButtonPressed:)]) {
+        [self.delegate environmentViewDoneButtonPressed:sender];
+    }
 }
 
 - (IBAction)environmentSwitchValueChanged:(UISwitch *)environmentSwitch {

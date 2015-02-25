@@ -33,6 +33,8 @@
 
     //set default environment
     [PIAPIEnvironmentManager sharedManager].defaultEnvironmentType = PIAPIEnvironmentTypeDEV;
+
+    [[PIAPIEnvironmentManager sharedManager] setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
 }
 
 @end

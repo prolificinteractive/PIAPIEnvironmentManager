@@ -8,31 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
-
-/**
- *  Environment Types currently supported
- */
-typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
-{
-    /**
-     *  Development Environment
-     */
-    PIAPIEnvironmentTypeDEV = 0,
-    /**
-     *  STAGING Environment
-     */
-    PIAPIEnvironmentTypeSTAGING,
-    /**
-     *  QA Environment
-     */
-    PIAPIEnvironmentTypeQA,
-    /**
-     *  Production Environment
-     */
-    PIAPIEnvironmentTypePROD
-};
+#import "PIAPIEnvironmentEnums.h"
 
 @interface PIAPIEnvironment : NSObject
+
+@property (nonatomic, readonly) PIAPIEnvironmentType environmentType;
+@property (nonatomic, readonly) NSURL *baseURL;
+@property (nonatomic, readonly) NSData *certificateData;
 
 /**
  *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType
@@ -57,10 +39,6 @@ typedef NS_ENUM (NSInteger, PIAPIEnvironmentType)
 + (instancetype)environmentWithBaseURL:(NSURL *)baseURL
                        environmentType:(PIAPIEnvironmentType)environmentType
                        certificateName:(NSString *)certificateName;
-
-@property (nonatomic, readonly) PIAPIEnvironmentType environmentType;
-@property (nonatomic, readonly) NSURL *baseURL;
-@property (nonatomic, readonly) NSData *certificateData;
 
 /**
  * Override the request and response serialization behavior

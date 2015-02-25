@@ -1,4 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '7.0'
 
 #Pods list
-pod 'PIAPIEnvironmentManager', :git => "git@bitbucket.org:prolificinteractive/piapienvironmentmanager.git"
+pod 'PIAPIEnvironmentManager', :path => "../"
