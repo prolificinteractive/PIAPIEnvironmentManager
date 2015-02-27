@@ -62,4 +62,15 @@
  */
 - (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType;
 
+/**
+ *  Method to present the UI to change the current environment
+ *
+ *  @param viewController UIViewController that is presenting the Environment View Controller
+ *  @param animated       BOOL of whether the Environment View Controller should be presented with animation
+ *  @param completion     The block to execute after the presentation finishes.
+ */
+- (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
+                                                animated:(BOOL)animated
+                                              completion:(void (^)(void))completion
+
 @end

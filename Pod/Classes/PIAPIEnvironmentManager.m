@@ -166,6 +166,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"kAPIEnvironmentManag
     }
 }
 
+- (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
+                                                animated:(BOOL)animated
+                                             completion:(void (^)(void))completion {
+      [viewController presentViewController:self.environmentViewNavController
+                                          animated:animated
+                                         completion:completion];
+}
+
 #pragma mark - Private Methods
 
 - (void)showEnvironmentView {
