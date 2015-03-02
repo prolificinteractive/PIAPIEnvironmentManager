@@ -13,8 +13,29 @@
 @interface PIAPIEnvironment : NSObject
 
 @property (nonatomic, readonly) PIAPIEnvironmentType environmentType;
+@property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSURL *baseURL;
+@property (nonatomic, readonly) NSString *summary;
 @property (nonatomic, readonly) NSData *certificateData;
+
+
++ (instancetype)environmentWithName:(NSString *)name
+                            baseURL:(NSURL *)baseURL
+                            summary:(NSString *)summary;
+
+
+
+
+/**
+ *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType
+ *
+ *  @param baseURL         NSURL of environment, ie: http://environment.com
+ *  @param environmentType PIAPIEnvironmentType of environment
+ *
+ *  @return Instance of PIAPIEnvironment with baseURL and environmentType
+ */
++ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
+                       environmentType:(PIAPIEnvironmentType)environmentType __attribute__ ((deprecated));
 
 /**
  *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType

@@ -18,9 +18,11 @@
 
 @end
 
-@interface PIAPIEnvironmentViewController : UIViewController
+@interface PIAPIEnvironmentViewController : UITableViewController
 
-@property (nonatomic, weak)   id <PIAPIEnvironmentViewDelegate> delegate;
+@property (nonatomic, weak) id <PIAPIEnvironmentViewDelegate> delegate;
+@property (nonatomic, weak) NSArray *environments;
+
 @property (nonatomic, assign) PIAPIEnvironmentType currentEnvironmentType;
 
 @end

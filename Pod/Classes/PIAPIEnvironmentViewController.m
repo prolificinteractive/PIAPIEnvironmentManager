@@ -7,20 +7,10 @@
 //
 
 #import "PIAPIEnvironmentViewController.h"
-#import "PIAPIEnvironment.h"
+#import "PIAPIEnvironmentTableViewCell.h"
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentEnums.h"
-
-@interface PIAPIEnvironmentViewController ()
-
-@property (nonatomic, weak) IBOutlet UISwitch *environmentPRODSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentPRODTextField;
-@property (nonatomic, weak) IBOutlet UISwitch *environmentQASwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentQATextField;
-@property (nonatomic, weak) IBOutlet UISwitch *environmentDEVSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentDEVTextField;
-
-@end
+#import "PIAPIEnvironment.h"
 
 @implementation PIAPIEnvironmentViewController
 
@@ -28,20 +18,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                target:self
-                                                                                action:@selector(doneButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.title = @"Environments";
+
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"]];
+
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:bundle];
+
+    [self.tableView registerNib:cellNib
+         forCellReuseIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(doneButtonPressed:)];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    [self setSwitchStates];
-    self.environmentPRODTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypePROD].absoluteString;
-    self.environmentQATextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeQA].absoluteString;
-    self.environmentDEVTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeDEV].absoluteString;
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//
+//    [self setSwitchStates];
+//    self.environmentPRODTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypePROD].absoluteString;
+//    self.environmentQATextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeQA].absoluteString;
+//    self.environmentDEVTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeDEV].absoluteString;
+//}
 
 #pragma mark - Custom Accessors
 
@@ -65,55 +63,94 @@
     }
 }
 
-- (IBAction)environmentSwitchValueChanged:(UISwitch *)environmentSwitch {
-    //set the currentEnvironmentType based on the switch toggled.
-    self.currentEnvironmentType = [self environmentTypeForSwitch:environmentSwitch];
-    [self setSwitchStates];
-}
+//- (IBAction)environmentSwitchValueChanged:(UISwitch *)environmentSwitch {
+//    //set the currentEnvironmentType based on the switch toggled.
+//    self.currentEnvironmentType = [self environmentTypeForSwitch:environmentSwitch];
+//    [self setSwitchStates];
+//}
 
 #pragma mark - Private Methods
 
-- (PIAPIEnvironmentType)environmentTypeForSwitch:(UISwitch *)environmentSwitch {
-    PIAPIEnvironmentType environmentType;
+//- (PIAPIEnvironmentType)environmentTypeForSwitch:(UISwitch *)environmentSwitch {
+//    PIAPIEnvironmentType environmentType;
+//
+//    if ([environmentSwitch isEqual:self.environmentDEVSwitch]) {
+//        environmentType = PIAPIEnvironmentTypeDEV;
+//    }
+//    else if ([environmentSwitch isEqual:self.environmentQASwitch]) {
+//        environmentType = PIAPIEnvironmentTypeQA;
+//    }
+//    else {
+//        environmentType = PIAPIEnvironmentTypePROD;
+//    }
+//
+//
+//    return environmentType;
+//}
+//
+//- (UISwitch *)switchForEnvironmentType:(PIAPIEnvironmentType)environmentType {
+//    UISwitch *environmentSwitch;
+//    if (environmentType == PIAPIEnvironmentTypeDEV) {
+//        environmentSwitch = self.environmentDEVSwitch;
+//    }
+//    else if (environmentType == PIAPIEnvironmentTypeQA) {
+//        environmentSwitch = self.environmentQASwitch;
+//    }
+//    else {
+//        environmentSwitch = self.environmentPRODSwitch;
+//    }
+//    return environmentSwitch;
+//}
+//
+//- (void)setSwitchStates {
+//    //set switch states
+//    self.environmentDEVSwitch.on = ([self.environmentDEVSwitch isEqual:
+//                                     [self switchForEnvironmentType:self.currentEnvironmentType]]);
+//
+//    self.environmentQASwitch.on = ([self.environmentQASwitch isEqual:
+//                                    [self switchForEnvironmentType:self.currentEnvironmentType]]);
+//
+//    self.environmentPRODSwitch.on = ([self.environmentPRODSwitch isEqual:
+//                                      [self switchForEnvironmentType:self.currentEnvironmentType]]);
+//}
 
-    if ([environmentSwitch isEqual:self.environmentDEVSwitch]) {
-        environmentType = PIAPIEnvironmentTypeDEV;
-    }
-    else if ([environmentSwitch isEqual:self.environmentQASwitch]) {
-        environmentType = PIAPIEnvironmentTypeQA;
-    }
-    else {
-        environmentType = PIAPIEnvironmentTypePROD;
-    }
+#pragma mark - UITableViewDataSource Methods
 
-
-    return environmentType;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.environments.count;
 }
 
-- (UISwitch *)switchForEnvironmentType:(PIAPIEnvironmentType)environmentType {
-    UISwitch *environmentSwitch;
-    if (environmentType == PIAPIEnvironmentTypeDEV) {
-        environmentSwitch = self.environmentDEVSwitch;
-    }
-    else if (environmentType == PIAPIEnvironmentTypeQA) {
-        environmentSwitch = self.environmentQASwitch;
-    }
-    else {
-        environmentSwitch = self.environmentPRODSwitch;
-    }
-    return environmentSwitch;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PIAPIEnvironmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier] forIndexPath:indexPath];
+    cell.environment = self.environments[indexPath.row];
+    return cell;
 }
 
-- (void)setSwitchStates {
-    //set switch states
-    self.environmentDEVSwitch.on = ([self.environmentDEVSwitch isEqual:
-                                     [self switchForEnvironmentType:self.currentEnvironmentType]]);
+#pragma mark - UITableViewDelegate Methods
 
-    self.environmentQASwitch.on = ([self.environmentQASwitch isEqual:
-                                    [self switchForEnvironmentType:self.currentEnvironmentType]]);
-
-    self.environmentPRODSwitch.on = ([self.environmentPRODSwitch isEqual:
-                                      [self switchForEnvironmentType:self.currentEnvironmentType]]);
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self heightForCellAtIndexPath:indexPath];
 }
 
+- (CGFloat)calculateHeightForSizingCell:(PIAPIEnvironmentTableViewCell *)sizingCell
+{
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height;
+}
+
+- (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    static PIAPIEnvironmentTableViewCell *sizingCell = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
+    });
+
+    sizingCell.environment = self.environments[indexPath.row];
+    return [self calculateHeightForSizingCell:sizingCell];
+}
 @end

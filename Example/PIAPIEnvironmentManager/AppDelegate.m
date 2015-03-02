@@ -19,13 +19,15 @@
 
 - (void)setupAPIEnvironments {
     //create environments
-    PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
-                                                                environmentType:PIAPIEnvironmentTypeDEV];
-    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
-                                                               environmentType:PIAPIEnvironmentTypeQA];
-    PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
-                                                                 environmentType:PIAPIEnvironmentTypePROD];
-
+    PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithName:@"DEV"
+                                                                     baseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
+                                                                     summary:@"dev environment"];
+    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"STAGING"
+                                                                     baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
+                                                                     summary:@"staging environment"];
+    PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithName:@"PROD"
+                                                                     baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
+                                                                     summary:@"prod environment"];
     //add environments to manager
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentDEV];
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentQA];

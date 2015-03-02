@@ -10,6 +10,16 @@
 
 @implementation PIAPIEnvironment
 
++ (instancetype)environmentWithName:(NSString *)name
+                            baseURL:(NSURL *)baseURL
+                            summary:(NSString *)summary
+{
+    return [[self alloc] initWithName:name
+                              baseURL:baseURL
+                              summary:summary];
+}
+
+
 /**
  *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType
  *
@@ -39,6 +49,19 @@
     return [[self alloc] initWithBaseURL:baseURL
                          environmentType:environmentType
                          certificateName:certificateName];
+}
+
+- (instancetype)initWithName:(NSString *)name
+                     baseURL:(NSURL *)baseURL
+                     summary:(NSString *)summary
+{
+    self = [super init];
+    if (self) {
+        _name       = name;
+        _baseURL    = baseURL;
+        _summary    = summary;
+    }
+    return self;
 }
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
