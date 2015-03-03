@@ -20,8 +20,8 @@
 
 @interface PIAPIEnvironmentViewController : UITableViewController
 
-@property (nonatomic, weak) id <PIAPIEnvironmentViewDelegate> delegate;
-@property (nonatomic, weak) NSArray *environments;
-@property (nonatomic, weak) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readwrite, weak) id <PIAPIEnvironmentViewDelegate> delegate;
+@property (nonatomic, readwrite, weak) NSArray *environments;
+@property (nonatomic, readwrite, weak) PIAPIEnvironment *currentEnvironment;
 
 @end

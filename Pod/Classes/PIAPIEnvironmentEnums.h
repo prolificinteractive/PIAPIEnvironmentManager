@@ -7,28 +7,6 @@
 //
 
 /**
- *  Environment Types currently supported
- */
-typedef enum PIAPIEnvironmentType {
-    /**
-     *  Development Environment
-     */
-    PIAPIEnvironmentTypeDEV,
-    /**
-     *  STAGING Environment
-     */
-    PIAPIEnvironmentTypeSTAGING,
-    /**
-     *  QA Environment
-     */
-    PIAPIEnvironmentTypeQA,
-    /**
-     *  Production Environment
-     */
-    PIAPIEnvironmentTypePROD
-} PIAPIEnvironmentType;
-
-/**
  Invoke Events currently supported
  */
 typedef enum PIAPIEnvironmentInvokeEvent {
