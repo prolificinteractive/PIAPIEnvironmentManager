@@ -24,12 +24,12 @@
                                                                      summary:@"This is the dev environment"
                                                                    isDefault:NO];
     PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"QA"
-                                                                     baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
-                                                                     summary:@"This is the QA environment"
+                                                                    baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
+                                                                    summary:@"This is the QA environment"
                                                                   isDefault:NO];
     PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithName:@"PROD"
-                                                                     baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
-                                                                     summary:@"This is the production environment."
+                                                                      baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
+                                                                      summary:@"This is the production environment"
                                                                     isDefault:YES];
     //add environments to manager
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentDEV];
