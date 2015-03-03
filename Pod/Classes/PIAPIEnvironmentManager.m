@@ -78,7 +78,7 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 
 - (PIAPIEnvironmentViewController *)environmentViewController {
     if (!_environmentViewController) {
-        _environmentViewController = [[PIAPIEnvironmentViewController alloc] initWithStyle:UITableViewStylePlain];
+        _environmentViewController = [PIAPIEnvironmentViewController new];
         _environmentViewController.environments = self.environments;
         _environmentViewController.delegate = self;
     }
