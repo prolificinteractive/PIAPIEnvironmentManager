@@ -16,6 +16,9 @@
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5d-oB-EMp">
                         <rect key="frame" x="262" y="10" width="51" height="31"/>
+                        <connections>
+                            <action selector="environmentSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="D6n-q1-Qxx"/>
+                        </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BXx-Kn-0di">
                         <rect key="frame" x="18" y="15" width="234" height="20"/>
@@ -62,6 +65,7 @@
             <connections>
                 <outlet property="environmentNameLabel" destination="BXx-Kn-0di" id="7Fv-7h-aDj"/>
                 <outlet property="environmentSummaryLabel" destination="EWm-xI-9sU" id="O0F-Dh-QAM"/>
+                <outlet property="environmentSwitch" destination="g5d-oB-EMp" id="I7b-Ep-efQ"/>
                 <outlet property="environmentURLTextFIeld" destination="0HK-C0-Gif" id="Jd1-U3-zkj"/>
             </connections>
             <point key="canvasLocation" x="120.5" y="313.5"/>

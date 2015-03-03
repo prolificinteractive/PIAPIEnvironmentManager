@@ -21,20 +21,20 @@
     //create environments
     PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithName:@"DEV"
                                                                      baseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
-                                                                     summary:@"dev environment"];
-    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"STAGING"
+                                                                     summary:@"This is the dev environment"
+                                                                   isDefault:NO];
+    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"QA"
                                                                      baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
-                                                                     summary:@"staging environment"];
+                                                                     summary:@"This is the QA environment"
+                                                                  isDefault:NO];
     PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithName:@"PROD"
                                                                      baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
-                                                                     summary:@"prod environment"];
+                                                                     summary:@"This is the production environment."
+                                                                    isDefault:YES];
     //add environments to manager
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentDEV];
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentQA];
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentPROD];
-
-    //set default environment
-    [PIAPIEnvironmentManager sharedManager].defaultEnvironmentType = PIAPIEnvironmentTypeDEV;
 
     [[PIAPIEnvironmentManager sharedManager] setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
 }

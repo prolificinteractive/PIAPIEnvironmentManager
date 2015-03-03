@@ -10,35 +10,47 @@
 
 @implementation PIAPIEnvironment
 
+#pragma mark - Init Methods
+
+- (instancetype)initWithName:(NSString *)name
+                     baseURL:(NSURL *)baseURL
+                     summary:(NSString *)summary
+                     isDefault:(BOOL)isDefault
+             certificateName:(NSString *)certificateName
+{
+    self = [super init];
+    if (self) {
+        _name       = name;
+        _baseURL    = baseURL;
+        _summary    = summary;
+        _isDefault  = isDefault;
+
+        if (certificateName) {
+            _certificateData = [NSData dataWithContentsOfFile:certificateName];
+        }
+    }
+    return self;
+}
+
+#pragma mark - Class Methods
+
 + (instancetype)environmentWithName:(NSString *)name
                             baseURL:(NSURL *)baseURL
                             summary:(NSString *)summary
+                            isDefault:(BOOL)isDefault
 {
     return [[self alloc] initWithName:name
                               baseURL:baseURL
-                              summary:summary];
+                              summary:summary
+                            isDefault:isDefault
+                      certificateName:nil];
 }
 
-
-/**
- *  Class method to create a PIAPIEnvironment instance with a required baseURL and environmentType
- *
- *  @param baseURL         NSURL of environment, ie: http://environment.com
- *  @param environmentType PIAPIEnvironmentType of environment
- *
- *  @return Instance of PIAPIEnvironment with baseURL and environmentType
- */
-+ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
-                       environmentType:(PIAPIEnvironmentType)environmentType
-{
-    return [self environmentWithBaseURL:baseURL
-                        environmentType:environmentType
-                        certificateName:nil];
-}
-
-+ (instancetype)environmentWithBaseURL:(NSURL *)baseURL
-                       environmentType:(PIAPIEnvironmentType)environmentType
-                       certificateName:(NSString *)certificateName
++ (instancetype)environmentWithName:(NSString *)name
+                            baseURL:(NSURL *)baseURL
+                            summary:(NSString *)summary
+                          isDefault:(BOOL)isDefault
+                    certificateName:(NSString *)certificateName
 {
     // certificateName can be nil.
     if (certificateName) {
@@ -46,38 +58,14 @@
         NSAssert([fileType isEqualToString:@"cer"], @"Certificate file must be a .cer format");
     }
 
-    return [[self alloc] initWithBaseURL:baseURL
-                         environmentType:environmentType
-                         certificateName:certificateName];
+    return [[self alloc] initWithName:name
+                              baseURL:baseURL
+                              summary:summary
+                            isDefault:isDefault
+                      certificateName:certificateName];
 }
 
-- (instancetype)initWithName:(NSString *)name
-                     baseURL:(NSURL *)baseURL
-                     summary:(NSString *)summary
-{
-    self = [super init];
-    if (self) {
-        _name       = name;
-        _baseURL    = baseURL;
-        _summary    = summary;
-    }
-    return self;
-}
-
-- (instancetype)initWithBaseURL:(NSURL *)baseURL
-                environmentType:(PIAPIEnvironmentType)environmentType
-                certificateName:(NSString *)certificateName
-{
-    self = [super init];
-    if (self) {
-        _baseURL = baseURL;
-        _environmentType = environmentType;
-        if (certificateName) {
-            _certificateData = [NSData dataWithContentsOfFile:certificateName];
-        }
-    }
-    return self;
-}
+#pragma mark - AFNetworking Implementation
 
 - (id <AFURLRequestSerialization> )requestSerializer
 {

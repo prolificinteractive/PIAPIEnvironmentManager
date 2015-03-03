@@ -12,8 +12,8 @@
 @protocol PIAPIEnvironmentViewDelegate <NSObject>
 
 @required
-- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
-- (void)environmentViewDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironment *)environment;
+- (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment;
 - (void)environmentViewDoneButtonPressed:(id)sender;
 
 @end
@@ -22,7 +22,6 @@
 
 @property (nonatomic, weak) id <PIAPIEnvironmentViewDelegate> delegate;
 @property (nonatomic, weak) NSArray *environments;
-
-@property (nonatomic, assign) PIAPIEnvironmentType currentEnvironmentType;
+@property (nonatomic, weak) PIAPIEnvironment *currentEnvironment;
 
 @end

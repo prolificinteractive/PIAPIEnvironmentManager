@@ -17,15 +17,15 @@
 /**
  *  Method called when the PIAPIEnvironmentManager will change the environment
  *
- *  @param environmentType The PIAPIEnvironmentType that is about to be changed
+ *  @param environmentType The PIAPIEnvironment that is about to be changed
  */
-- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
 /**
  *  Method called when the PIAPIEnvironmentManager did change the environment
  *
- *  @param environmentType The PIAPIEnvironmentType that was changed too
+ *  @param environmentType The PIAPIEnvironment that was changed too
  */
-- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironment *)environment;
 
 @end
 
@@ -34,7 +34,6 @@
 + (instancetype)sharedManager;
 
 @property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
-@property (nonatomic, assign) PIAPIEnvironmentType defaultEnvironmentType;
 @property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
 @property (nonatomic, readonly) NSURL *currentEnvironmentURL;
 
@@ -46,21 +45,12 @@
 - (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
 
 /**
- *  Add a environment to the manager, should be of one type for each DEV, QA, PROD
+ *  Add a environment to the manager
  *  Should be called in the your app delegate. (See example project)
  *
  *  @param environment PIAPIEnvironment to set
  */
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
-
-/**
- *  Returns the baseURL for the specified PIAPIEnvironmentType
- *
- *  @param environmentType PIAPIEnvironmentType to return the baseURL
- *
- *  @return baseURL for specified PIAPIEnvironmentType
- */
-- (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType;
 
 /**
  *  Method to present the UI to change the current environment

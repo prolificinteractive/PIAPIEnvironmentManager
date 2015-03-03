@@ -10,9 +10,20 @@
 
 @class PIAPIEnvironment;
 
+@protocol PIAPIEnvironmentTableViewCellDelegate <NSObject>
+
+- (void) environmentCellSwitchToggled:(UISwitch *)environmentSwitch
+                       forEnvironment:(PIAPIEnvironment *)environment;
+
+@end
+
 @interface PIAPIEnvironmentTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) PIAPIEnvironment *environment;
+@property (nonatomic, weak) id<PIAPIEnvironmentTableViewCellDelegate> delegate;
+
+@property (nonatomic, weak, readonly) PIAPIEnvironment *environment;
+
+- (void)setEnvironment:(PIAPIEnvironment *)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment;
 
 + (NSString *) identifier;
 
