@@ -33,9 +33,10 @@
 
 + (instancetype)sharedManager;
 
-@property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
-@property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
-@property (nonatomic, readonly) NSURL *currentEnvironmentURL;
+@property (nonatomic, readwrite, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
+
+@property (nonatomic, readonly, strong) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readonly, strong) NSURL *currentEnvironmentURL;
 
 /**
  *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
@@ -51,6 +52,15 @@
  *  @param environment PIAPIEnvironment to set
  */
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
+
+/**
+ *  Return a PIAPIEnvironment from the its baseURL absoluteString 
+ *
+ *  @param baseURLString NSString absoluteString of baseURL of environment
+ *
+ *  @return PIAPIEnvironment from baseURLString. Will return nil if none match
+ */
+- (PIAPIEnvironment *)environmentFromBaseURLString:(NSString *)baseURLString;
 
 /**
  *  Method to present the UI to change the current environment

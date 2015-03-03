@@ -12,10 +12,11 @@
 
 @interface PIAPIEnvironment : NSObject
 
-@property (nonatomic, readonly) NSString    *name;
-@property (nonatomic, readonly) NSURL       *baseURL;
-@property (nonatomic, readonly) NSString    *summary;
-@property (nonatomic, readonly) NSData      *certificateData;
+@property (nonatomic, readwrite, strong) NSString *name;
+@property (nonatomic, readwrite, strong) NSString *summary;
+
+@property (nonatomic, readonly, strong) NSURL  *baseURL;
+@property (nonatomic, readonly, strong) NSData *certificateData;
 
 @property (nonatomic, readonly, assign) BOOL isDefault;
 

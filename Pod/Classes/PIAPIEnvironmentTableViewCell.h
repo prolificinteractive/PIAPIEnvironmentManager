@@ -19,9 +19,9 @@
 
 @interface PIAPIEnvironmentTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) id<PIAPIEnvironmentTableViewCellDelegate> delegate;
+@property (nonatomic, readwrite, weak) id<PIAPIEnvironmentTableViewCellDelegate> delegate;
 
-@property (nonatomic, weak, readonly) PIAPIEnvironment *environment;
+@property (nonatomic, readonly, weak) PIAPIEnvironment *environment;
 
 - (void)setEnvironment:(PIAPIEnvironment *)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment;
 
