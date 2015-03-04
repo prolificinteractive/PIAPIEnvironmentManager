@@ -16,7 +16,7 @@
  * To include environment switching in the Settings bundle, add an item with this key
  * Make sure items are numbered according to the enum defined in PIAPIEnvironment.h
  */
-extern NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier;
+extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
 
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
