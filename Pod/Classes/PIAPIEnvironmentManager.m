@@ -165,7 +165,7 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 - (void)addEnvironment:(PIAPIEnvironment *)environment {
     [self.environments addObject:environment];
 
-    if (environment.isDefault){
+    if (environment.isDefault) {
        //The defaultEnvironmentType is not saved if we have a stored environment to remember last environment
         if (!self.currentEnvironment){
              self.currentEnvironment = environment;
@@ -175,8 +175,8 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 
 - (PIAPIEnvironment *)environmentFromBaseURLString:(NSString *)baseURLString
 {
-    for (PIAPIEnvironment *environment in self.environments){
-        if ([baseURLString isEqualToString:environment.baseURL.absoluteString]){
+    for (PIAPIEnvironment *environment in self.environments) {
+        if ([baseURLString isEqualToString:environment.baseURL.absoluteString]) {
             return environment;
         }
     }
@@ -186,7 +186,9 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 
 - (void)environmentViewWillChangeEnvironment:(PIAPIEnvironment *)environment {
-    [self.delegate environmentManagerWillChangeEnvironment:environment];
+    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
+        [self.delegate environmentManagerWillChangeEnvironment:environment];
+    }
 }
 
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment {

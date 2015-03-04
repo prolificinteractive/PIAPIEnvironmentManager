@@ -17,13 +17,13 @@
 /**
  *  Method called when the PIAPIEnvironmentManager will change the environment
  *
- *  @param environmentType The PIAPIEnvironment that is about to be changed
+ *  @param environment The PIAPIEnvironment that is about to be changed
  */
 - (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
 /**
  *  Method called when the PIAPIEnvironmentManager did change the environment
  *
- *  @param environmentType The PIAPIEnvironment that was changed too
+ *  @param environment The PIAPIEnvironment that was changed to
  */
 - (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironment *)environment;
 
