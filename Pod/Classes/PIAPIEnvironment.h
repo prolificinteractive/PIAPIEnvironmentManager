@@ -40,11 +40,11 @@
 /**
  *  Class method to create a PIAPIEnvironment
  *
- *  @param name      NSString name of environment (i.e "DEV")
- *  @param baseURL   NSURL of environment, ie: http://environment.com
- *  @param summary   NSString summary/description of environment
- *  @param isDefault BOOL if environment is the default environment selected
- *  @param certificateName Certificate name. Optional. Can be nil. The certificate must be a .cer format.
+ *  @param name             NSString name of environment (i.e "DEV")
+ *  @param baseURL          NSURL of environment, ie: http://environment.com
+ *  @param summary          NSString summary/description of environment
+ *  @param isDefault        BOOL if environment is the default environment selected
+ *  @param certificateName  Certificate file name. Optional. Can be nil. The certificate must be a .cer format.
  *
  *  @return Instance of PIAPIEnvironment
  */
