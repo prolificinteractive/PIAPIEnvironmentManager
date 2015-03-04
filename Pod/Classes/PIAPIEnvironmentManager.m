@@ -101,7 +101,20 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 - (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment
 {
+    if (_currentEnvironment == currentEnvironment) {
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
+        [self.delegate environmentManagerWillChangeEnvironment:currentEnvironment];
+    }
+
     _currentEnvironment = currentEnvironment;
+
+    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
+        [self.delegate environmentManagerDidChangeEnvironment:currentEnvironment];
+    }
+
     [self setUserDefaultsEnvironment:currentEnvironment];
 }
 
@@ -171,9 +184,7 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 - (void)userDefaultsDidChange
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // Set ivar directly because setter sets user defaults value again
-    _currentEnvironment = [self environmentFromUserDefaults];
+    self.currentEnvironment = [self environmentFromUserDefaults];
 }
 
 #pragma mark - Private Methods
@@ -218,20 +229,8 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 
-- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironment *)environment {
-    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
-        [self.delegate environmentManagerWillChangeEnvironment:environment];
-    }
-}
-
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment {
-    if (self.currentEnvironment != environment) {
-        self.currentEnvironment = environment;
-    }
-
-    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
-        [self.delegate environmentManagerDidChangeEnvironment:environment];
-    }
+    self.currentEnvironment = environment;
 }
 
 - (void)environmentViewDoneButtonPressed:(id)sender {

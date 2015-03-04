@@ -38,10 +38,6 @@
 #pragma mark - Custom Accessors
 
 - (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment {
-    if ([self.delegate respondsToSelector:@selector(environmentViewWillChangeEnvironment:)]) {
-        [self.delegate environmentViewWillChangeEnvironment:_currentEnvironment];
-    }
-
     _currentEnvironment = currentEnvironment;
 
     if ([self.delegate respondsToSelector:@selector(environmentViewDidChangeEnvironment:)]) {
