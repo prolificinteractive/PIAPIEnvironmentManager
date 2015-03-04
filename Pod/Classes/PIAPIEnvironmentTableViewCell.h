@@ -12,6 +12,12 @@
 
 @protocol PIAPIEnvironmentTableViewCellDelegate <NSObject>
 
+/**
+ *  Delegate Method to communicate when a switch has been toggled
+ *
+ *  @param environmentSwitch UISwitch toggled
+ *  @param environment       PIAPIEnvironment that corresponds to the UISwitch toggled
+ */
 - (void) environmentCellSwitchToggled:(UISwitch *)environmentSwitch
                        forEnvironment:(PIAPIEnvironment *)environment;
 
