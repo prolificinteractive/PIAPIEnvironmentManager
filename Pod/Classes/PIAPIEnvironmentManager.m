@@ -88,8 +88,8 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 
 - (PIAPIEnvironment *)currentEnvironment {
     if (!_currentEnvironment) {
-        NSString *baseUrlString = [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentManagerIdentifier];
-        _currentEnvironment = [self environmentFromBaseURLString:baseUrlString];
+        NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentManagerIdentifier];
+        _currentEnvironment = [self environmentFromName:name];
     }
     return _currentEnvironment;
 }
@@ -97,7 +97,7 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 - (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment
 {
     _currentEnvironment = currentEnvironment;
-    [[NSUserDefaults standardUserDefaults] setObject:currentEnvironment.baseURL.absoluteString
+    [[NSUserDefaults standardUserDefaults] setObject:currentEnvironment.name
                                               forKey:kAPIEnvironmentManagerIdentifier];
 }
 
@@ -132,6 +132,16 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
       [viewController presentViewController:self.environmentViewNavController
                                           animated:animated
                                          completion:completion];
+}
+
+- (PIAPIEnvironment *)environmentFromName:(NSString *)name
+{
+    for (PIAPIEnvironment *environment in self.environments) {
+        if ([name isEqualToString:environment.name]) {
+            return environment;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Private Methods
@@ -173,15 +183,7 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
     }
 }
 
-- (PIAPIEnvironment *)environmentFromBaseURLString:(NSString *)baseURLString
-{
-    for (PIAPIEnvironment *environment in self.environments) {
-        if ([baseURLString isEqualToString:environment.baseURL.absoluteString]) {
-            return environment;
-        }
-    }
-    return nil;
-}
+
 
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 

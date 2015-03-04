@@ -54,13 +54,13 @@
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
 
 /**
- *  Return a PIAPIEnvironment from the its baseURL absoluteString 
+ *  Return a PIAPIEnvironment from the its name
  *
- *  @param baseURLString NSString absoluteString of baseURL of environment
+ *  @param name NSString the name of the environment
  *
- *  @return PIAPIEnvironment from baseURLString. Will return nil if none match
+ *  @return PIAPIEnvironment from its name. Will return nil if none match
  */
-- (PIAPIEnvironment *)environmentFromBaseURLString:(NSString *)baseURLString;
+- (PIAPIEnvironment *)environmentFromName:(NSString *)name;
 
 /**
  *  Method to present the UI to change the current environment
