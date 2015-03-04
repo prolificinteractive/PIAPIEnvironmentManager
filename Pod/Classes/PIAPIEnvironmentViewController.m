@@ -7,106 +7,104 @@
 //
 
 #import "PIAPIEnvironmentViewController.h"
-#import "PIAPIEnvironment.h"
+#import "PIAPIEnvironmentTableViewCell.h"
 #import "PIAPIEnvironmentManager.h"
+#import "PIAPIEnvironmentEnums.h"
+#import "PIAPIEnvironment.h"
 
-@interface PIAPIEnvironmentViewController ()
-
-@property (nonatomic, weak) IBOutlet UISwitch *environmentPRODSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentPRODTextField;
-@property (nonatomic, weak) IBOutlet UISwitch *environmentQASwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentQATextField;
-@property (nonatomic, weak) IBOutlet UISwitch *environmentDEVSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *environmentDEVTextField;
+@interface PIAPIEnvironmentViewController() <PIAPIEnvironmentTableViewCellDelegate>
 
 @end
 
 @implementation PIAPIEnvironmentViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                target:self
-                                                                                action:@selector(doneButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-}
+    self.title = @"Environments";
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"]];
 
-    [self setSwitchStates];
-    self.environmentPRODTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypePROD].absoluteString;
-    self.environmentQATextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeQA].absoluteString;
-    self.environmentDEVTextField.text = [[PIAPIEnvironmentManager sharedManager] baseURLForEnvironmentType:PIAPIEnvironmentTypeDEV].absoluteString;
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:bundle];
+
+    [self.tableView registerNib:cellNib
+         forCellReuseIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(doneButtonPressed:)];
 }
 
 #pragma mark - Custom Accessors
 
-- (void)setCurrentEnvironmentType:(PIAPIEnvironmentType)currentEnvironmentType {
-    _currentEnvironmentType = currentEnvironmentType;
+- (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment {
+    if ([self.delegate respondsToSelector:@selector(environmentViewWillChangeEnvironment:)]) {
+        [self.delegate environmentViewWillChangeEnvironment:_currentEnvironment];
+    }
+
+    _currentEnvironment = currentEnvironment;
 
     if ([self.delegate respondsToSelector:@selector(environmentViewDidChangeEnvironment:)]) {
-        [self.delegate environmentViewDidChangeEnvironment:_currentEnvironmentType];
+        [self.delegate environmentViewDidChangeEnvironment:_currentEnvironment];
     }
+}
+
+#pragma mark - UITableViewDataSource Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.environments.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PIAPIEnvironmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier] forIndexPath:indexPath];
+    PIAPIEnvironment *environment = self.environments[indexPath.row];
+    [cell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
+    cell.delegate = self;
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate Methods
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self heightForCellAtIndexPath:indexPath];
+}
+
+#pragma mark - PIAPIEnvironmentTableViewCellDelegate Methods
+
+- (void)environmentCellSwitchToggled:(UISwitch *)environmentSwitch forEnvironment:(PIAPIEnvironment *)environment
+{
+    self.currentEnvironment = environment;
+
+    //set all toggles to off
+    [self.tableView reloadData];
 }
 
 #pragma mark - Action Methods
 
 - (void)doneButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)environmentSwitchValueChanged:(UISwitch *)environmentSwitch {
-    //set the currentEnvironmentType based on the switch toggled.
-    self.currentEnvironmentType = [self environmentTypeForSwitch:environmentSwitch];
-    [self setSwitchStates];
+    if ([self.delegate respondsToSelector:@selector(environmentViewDoneButtonPressed:)]) {
+        [self.delegate environmentViewDoneButtonPressed:sender];
+    }
 }
 
 #pragma mark - Private Methods
 
-- (PIAPIEnvironmentType)environmentTypeForSwitch:(UISwitch *)environmentSwitch {
-    PIAPIEnvironmentType environmentType;
+- (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    static PIAPIEnvironmentTableViewCell *sizingCell = nil;
+    static dispatch_once_t onceToken;
 
-    if ([environmentSwitch isEqual:self.environmentDEVSwitch]) {
-        environmentType = PIAPIEnvironmentTypeDEV;
-    }
-    else if ([environmentSwitch isEqual:self.environmentQASwitch]) {
-        environmentType = PIAPIEnvironmentTypeQA;
-    }
-    else {
-        environmentType = PIAPIEnvironmentTypePROD;
-    }
+    dispatch_once(&onceToken, ^{
+        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
+    });
 
-
-    return environmentType;
-}
-
-- (UISwitch *)switchForEnvironmentType:(PIAPIEnvironmentType)environmentType {
-    UISwitch *environmentSwitch;
-    if (environmentType == PIAPIEnvironmentTypeDEV) {
-        environmentSwitch = self.environmentDEVSwitch;
-    }
-    else if (environmentType == PIAPIEnvironmentTypeQA) {
-        environmentSwitch = self.environmentQASwitch;
-    }
-    else {
-        environmentSwitch = self.environmentPRODSwitch;
-    }
-    return environmentSwitch;
-}
-
-- (void)setSwitchStates {
-    //set switch states
-    self.environmentDEVSwitch.on = ([self.environmentDEVSwitch isEqual:
-                                     [self switchForEnvironmentType:self.currentEnvironmentType]]);
-
-    self.environmentQASwitch.on = ([self.environmentQASwitch isEqual:
-                                    [self switchForEnvironmentType:self.currentEnvironmentType]]);
-
-    self.environmentPRODSwitch.on = ([self.environmentPRODSwitch isEqual:
-                                      [self switchForEnvironmentType:self.currentEnvironmentType]]);
+    PIAPIEnvironment *environment = self.environments[indexPath.row];
+    [sizingCell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+    return ([sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize]).height;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironment.h"
 
 /**
@@ -19,16 +20,19 @@ extern NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier;
 
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
-@required
-/**
- *  Required b/c it is mandatory that the session is reset before environments are changed for testing
- *
- *  @param environmentType The PIAPIEnvironmentType that is about to be changed
- */
-- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
-
 @optional
-- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+/**
+ *  Method called when the PIAPIEnvironmentManager will change the environment
+ *
+ *  @param environment The PIAPIEnvironment that is about to be changed
+ */
+- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
+/**
+ *  Method called when the PIAPIEnvironmentManager did change the environment
+ *
+ *  @param environment The PIAPIEnvironment that was changed to
+ */
+- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironment *)environment;
 
 @end
 
@@ -36,13 +40,20 @@ extern NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier;
 
 + (instancetype)sharedManager;
 
-@property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
-@property (nonatomic, assign) PIAPIEnvironmentType defaultEnvironmentType;
-@property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
-@property (nonatomic, readonly) NSURL *currentEnvironmentURL;
+@property (nonatomic, readwrite, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
+
+@property (nonatomic, readonly, strong) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readonly, strong) NSURL *currentEnvironmentURL;
 
 /**
- *  Add a environment to the manager, should be of one type for each DEV, QA, PROD
+ *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
+ *
+ *  @param invokeEvent PIAPIEnvironmentInvokeEvent that will be triggered
+ */
+- (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
+
+/**
+ *  Add a environment to the manager
  *  Should be called in the your app delegate. (See example project)
  *
  *  @param environment PIAPIEnvironment to set
@@ -50,8 +61,16 @@ extern NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier;
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
 
 /**
- *  Method to present the UI to change the current environment.
- *  Recommended that this is implemented via the shake feature. (See example project)
+ *  Return a PIAPIEnvironment from the its name
+ *
+ *  @param name NSString the name of the environment
+ *
+ *  @return PIAPIEnvironment from its name. Will return nil if none match
+ */
+- (PIAPIEnvironment *)environmentFromName:(NSString *)name;
+
+/**
+ *  Method to present the UI to change the current environment
  *
  *  @param viewController UIViewController that is presenting the Environment View Controller
  *  @param animated       BOOL of whether the Environment View Controller should be presented with animation
@@ -60,14 +79,5 @@ extern NSString *const kAPIEnvironmentTypeUserDefaultsIdentifier;
 - (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
                                                 animated:(BOOL)animated
                                               completion:(void (^)(void))completion;
-
-/**
- *  Returns the baseURL for the specified PIAPIEnvironmentType
- *
- *  @param environmentType PIAPIEnvironmentType to return the baseURL
- *
- *  @return baseURL for specified PIAPIEnvironmentType
- */
-- (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType;
 
 @end
