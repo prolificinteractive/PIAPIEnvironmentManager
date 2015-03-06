@@ -44,6 +44,7 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
 
 @property (nonatomic, readonly, strong) PIAPIEnvironment *currentEnvironment;
 @property (nonatomic, readonly, strong) NSURL *currentEnvironmentURL;
+@property (nonatomic, readonly, strong) NSMutableArray *environments;
 
 /**
  *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
