@@ -13,7 +13,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManager";
+NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentName";
 
 @interface PIAPIEnvironmentManager () <PIAPIEnvironmentViewDelegate> {
     PIAPIEnvironment *_currentEnvironment;
@@ -44,8 +44,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
     self = [super init];
     if (self) {
         self.environments = [NSMutableArray new];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSUserDefaultsDidChangeNotification object:nil];
 }
 
 #pragma mark - Custom Accessors
@@ -88,17 +94,28 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 
 - (PIAPIEnvironment *)currentEnvironment {
     if (!_currentEnvironment) {
-        NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentManagerIdentifier];
-        _currentEnvironment = [self environmentFromName:name];
+        _currentEnvironment = [self environmentFromUserDefaults];
     }
     return _currentEnvironment;
 }
 
 - (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment
 {
+    if (_currentEnvironment == currentEnvironment) {
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
+        [self.delegate environmentManagerWillChangeEnvironment:currentEnvironment];
+    }
+
     _currentEnvironment = currentEnvironment;
-    [[NSUserDefaults standardUserDefaults] setObject:currentEnvironment.name
-                                              forKey:kAPIEnvironmentManagerIdentifier];
+
+    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
+        [self.delegate environmentManagerDidChangeEnvironment:currentEnvironment];
+    }
+
+    [self setUserDefaultsEnvironment:currentEnvironment];
 }
 
 - (NSURL *)currentEnvironmentURL
@@ -106,6 +123,24 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
     return self.currentEnvironment.baseURL;
 }
 
+#pragma mark - User Defaults
+- (NSString *)environmentNameFromUserDefaults
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentNameUserDefaultsIdentifier];
+}
+        
+- (PIAPIEnvironment *)environmentFromUserDefaults
+{
+    return [self environmentFromName:[self environmentNameFromUserDefaults]];
+}
+
+- (void)setUserDefaultsEnvironment:(PIAPIEnvironment *)environment
+{
+    if (![[self environmentNameFromUserDefaults] isEqualToString:environment.name]) {
+        [[NSUserDefaults standardUserDefaults] setObject:environment.name
+                                                  forKey:kAPIEnvironmentNameUserDefaultsIdentifier];
+    }
+}
 #pragma mark - Public Methods
 
 - (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent {
@@ -142,6 +177,14 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
         }
     }
     return nil;
+}
+
+#pragma mark - Notifications
+
+- (void)userDefaultsDidChange
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.currentEnvironment = [self environmentFromUserDefaults];
 }
 
 #pragma mark - Private Methods
@@ -184,23 +227,10 @@ static NSString *const kAPIEnvironmentManagerIdentifier = @"APIEnvironmentManage
 }
 
 
-
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 
-- (void)environmentViewWillChangeEnvironment:(PIAPIEnvironment *)environment {
-    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
-        [self.delegate environmentManagerWillChangeEnvironment:environment];
-    }
-}
-
 - (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment {
-    if (self.currentEnvironment != environment) {
-        self.currentEnvironment = environment;
-    }
-
-    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
-        [self.delegate environmentManagerDidChangeEnvironment:environment];
-    }
+    self.currentEnvironment = environment;
 }
 
 - (void)environmentViewDoneButtonPressed:(id)sender {

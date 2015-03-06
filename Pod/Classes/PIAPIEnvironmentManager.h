@@ -11,6 +11,13 @@
 #import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironment.h"
 
+/**
+ * User defaults key for API Environment
+ * To include environment switching in the Settings bundle, add an item with this key
+ * Values should correspond to the enviornment name set in PIAPIEnvironment
+ */
+extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
+
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
 @optional
