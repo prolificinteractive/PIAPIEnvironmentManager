@@ -11,21 +11,28 @@
 #import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironment.h"
 
+/**
+ * User defaults key for API Environment
+ * To include environment switching in the Settings bundle, add an item with this key
+ * Values should correspond to the enviornment name set in PIAPIEnvironment
+ */
+extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
+
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
 @optional
 /**
  *  Method called when the PIAPIEnvironmentManager will change the environment
  *
- *  @param environmentType The PIAPIEnvironmentType that is about to be changed
+ *  @param environment The PIAPIEnvironment that is about to be changed
  */
-- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
 /**
  *  Method called when the PIAPIEnvironmentManager did change the environment
  *
- *  @param environmentType The PIAPIEnvironmentType that was changed too
+ *  @param environment The PIAPIEnvironment that was changed to
  */
-- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironmentType)environmentType;
+- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironment *)environment;
 
 @end
 
@@ -33,10 +40,10 @@
 
 + (instancetype)sharedManager;
 
-@property (nonatomic, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
-@property (nonatomic, assign) PIAPIEnvironmentType defaultEnvironmentType;
-@property (nonatomic, readonly) PIAPIEnvironment *currentEnvironment;
-@property (nonatomic, readonly) NSURL *currentEnvironmentURL;
+@property (nonatomic, readwrite, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
+
+@property (nonatomic, readonly, strong) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readonly, strong) NSURL *currentEnvironmentURL;
 
 /**
  *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
@@ -46,7 +53,7 @@
 - (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
 
 /**
- *  Add a environment to the manager, should be of one type for each DEV, QA, PROD
+ *  Add a environment to the manager
  *  Should be called in the your app delegate. (See example project)
  *
  *  @param environment PIAPIEnvironment to set
@@ -54,13 +61,13 @@
 - (void)addEnvironment:(PIAPIEnvironment *)environment;
 
 /**
- *  Returns the baseURL for the specified PIAPIEnvironmentType
+ *  Return a PIAPIEnvironment from the its name
  *
- *  @param environmentType PIAPIEnvironmentType to return the baseURL
+ *  @param name NSString the name of the environment
  *
- *  @return baseURL for specified PIAPIEnvironmentType
+ *  @return PIAPIEnvironment from its name. Will return nil if none match
  */
-- (NSURL *)baseURLForEnvironmentType:(PIAPIEnvironmentType)environmentType;
+- (PIAPIEnvironment *)environmentFromName:(NSString *)name;
 
 /**
  *  Method to present the UI to change the current environment

@@ -19,20 +19,22 @@
 
 - (void)setupAPIEnvironments {
     //create environments
-    PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
-                                                                environmentType:PIAPIEnvironmentTypeDEV];
-    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
-                                                               environmentType:PIAPIEnvironmentTypeQA];
-    PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithBaseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
-                                                                 environmentType:PIAPIEnvironmentTypePROD];
-
+    PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithName:@"DEV"
+                                                                     baseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
+                                                                     summary:@"This is the dev environment"
+                                                                   isDefault:NO];
+    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"QA"
+                                                                    baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
+                                                                    summary:@"This is the QA environment"
+                                                                  isDefault:NO];
+    PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithName:@"PROD"
+                                                                      baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
+                                                                      summary:@"This is the production environment"
+                                                                    isDefault:YES];
     //add environments to manager
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentDEV];
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentQA];
     [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentPROD];
-
-    //set default environment
-    [PIAPIEnvironmentManager sharedManager].defaultEnvironmentType = PIAPIEnvironmentTypeDEV;
 
     [[PIAPIEnvironmentManager sharedManager] setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
 }
