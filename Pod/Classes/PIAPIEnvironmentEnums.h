@@ -11,7 +11,7 @@
  */
 typedef enum PIAPIEnvironmentInvokeEvent {
     /**
-     *  No event will present the environment view controller, you must handle yourself
+     *  No event will present the environment view controller, you must present manually
      */
     PIAPIEnvironmentInvokeEventNone,
     /**

@@ -21,12 +21,14 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
 @optional
+
 /**
  *  Method called when the PIAPIEnvironmentManager will change the environment
  *
  *  @param environment The PIAPIEnvironment that is about to be changed
  */
 - (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
+
 /**
  *  Method called when the PIAPIEnvironmentManager did change the environment
  *
@@ -38,28 +40,26 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
 
 @interface PIAPIEnvironmentManager : NSObject
 
-+ (instancetype)sharedManager;
-
-@property (nonatomic, readwrite, weak)   id <PIAPIEnvironmentManagerDelegate> delegate;
-
-@property (nonatomic, readonly, strong) PIAPIEnvironment *currentEnvironment;
-@property (nonatomic, readonly, strong) NSURL *currentEnvironmentURL;
-@property (nonatomic, readonly, strong) NSMutableArray *environments;
+/**
+ *  Return the current PIAPIEnvironment that is selected
+ *
+ *  @return current PIAPIEnvironment
+ */
++ (PIAPIEnvironment *)currentEnvironment;
 
 /**
- *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
+ *  Return the baseURL of the current PIAPIEnvironment
  *
- *  @param invokeEvent PIAPIEnvironmentInvokeEvent that will be triggered
+ *  @return NSURL of the current PIAPIEnvironment
  */
-- (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
++ (NSURL *)currentEnvironmentURL;
 
 /**
- *  Add a environment to the manager
- *  Should be called in the your app delegate. (See example project)
+ *  Return an array of added environments
  *
- *  @param environment PIAPIEnvironment to set
+ *  @return NSArray of added PIAPIEnvironments
  */
-- (void)addEnvironment:(PIAPIEnvironment *)environment;
++ (NSArray *)environments;
 
 /**
  *  Return a PIAPIEnvironment from the its name
@@ -68,7 +68,39 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
  *
  *  @return PIAPIEnvironment from its name. Will return nil if none match
  */
-- (PIAPIEnvironment *)environmentFromName:(NSString *)name;
++ (void) setDelegate: (id<PIAPIEnvironmentManagerDelegate>)delegate;
+
+/**
+ *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
+ *
+ *  @param invokeEvent PIAPIEnvironmentInvokeEvent that will be triggered
+ */
++ (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
+
+/**
+ *  Add a environment to the manager
+ *  Should be called in the your app delegate.
+ *
+ *  @param environment PIAPIEnvironment to set
+ */
++ (void)addEnvironment:(PIAPIEnvironment *)environment;
+
+/**
+ *  Add an array of environments to the manager
+ *  Should be called in the your app delegate. (See example project)
+ *
+ *  @param environments NSArray of PIAPIEnvironments to set
+ */
++ (void)addEnvironments:(NSArray *)environments;
+
+/**
+ *  Return a PIAPIEnvironment from the its name
+ *
+ *  @param name NSString the name of the environment
+ *
+ *  @return PIAPIEnvironment from its name. Will return nil if none match
+ */
++ (PIAPIEnvironment *)environmentFromName:(NSString *)name;
 
 /**
  *  Method to present the UI to change the current environment
@@ -77,7 +109,7 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
  *  @param animated       BOOL of whether the Environment View Controller should be presented with animation
  *  @param completion     The block to execute after the presentation finishes.
  */
-- (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
++ (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
                                                 animated:(BOOL)animated
                                               completion:(void (^)(void))completion;
 
