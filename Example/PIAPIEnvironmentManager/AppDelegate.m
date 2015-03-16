@@ -32,11 +32,9 @@
                                                                       summary:@"This is the production environment"
                                                                     isDefault:YES];
     //add environments to manager
-    [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentDEV];
-    [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentQA];
-    [[PIAPIEnvironmentManager sharedManager] addEnvironment:environmentPROD];
+    [PIAPIEnvironmentManager addEnvironments:@[environmentDEV, environmentQA, environmentPROD]];
 
-    [[PIAPIEnvironmentManager sharedManager] setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
+    [PIAPIEnvironmentManager setInvokeEvent:PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft];
 }
 
 @end
