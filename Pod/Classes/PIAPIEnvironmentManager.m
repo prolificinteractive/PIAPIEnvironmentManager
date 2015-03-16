@@ -238,6 +238,11 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 #pragma mark - Private Methods
 
++ (void)showEnvironmentView
+{
+    [[PIAPIEnvironmentManager sharedManager] showEnvironmentView];
+}
+
 - (void)showEnvironmentView
 {
     CGRect originalFrame = self.environmentWindow.frame;
