@@ -18,7 +18,7 @@
 @implementation ViewController
 
 - (IBAction)updateURLButtonPressed:(id)sender {
-    self.currentURLLabel.text = [[PIAPIEnvironmentManager sharedManager].currentEnvironmentURL absoluteString];
+    self.currentURLLabel.text = [[PIAPIEnvironmentManager currentEnvironmentURL] absoluteString];
 }
 
 @end
