@@ -161,7 +161,7 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 + (NSArray *)environments
 {
-    return [PIAPIEnvironmentManager sharedManager].environments.copy;
+    return [[PIAPIEnvironmentManager sharedManager].environments copy];
 }
 
 + (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent
@@ -206,7 +206,7 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 + (void)addEnvironments:(NSArray *)environments
 {
-    [PIAPIEnvironmentManager sharedManager].environments = environments.mutableCopy;
+    [[PIAPIEnvironmentManager sharedManager].environments addObjectsFromArray:environments];
 }
 
 + (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
