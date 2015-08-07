@@ -10,7 +10,6 @@
 #import "PIAPIEnvironmentTableViewCell.h"
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentEnums.h"
-#import "PIAPIEnvironment.h"
 
 @interface PIAPIEnvironmentViewController() <PIAPIEnvironmentTableViewCellDelegate>
 
@@ -37,7 +36,7 @@
 
 #pragma mark - Custom Accessors
 
-- (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment {
+- (void)setCurrentEnvironment:(id<PIAPIEnvironmentObject>)currentEnvironment {
     _currentEnvironment = currentEnvironment;
 
     if ([self.delegate respondsToSelector:@selector(environmentViewDidChangeEnvironment:)]) {
@@ -54,7 +53,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PIAPIEnvironmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier] forIndexPath:indexPath];
-    PIAPIEnvironment *environment = self.environments[indexPath.row];
+    id<PIAPIEnvironmentObject> environment = self.environments[indexPath.row];
     [cell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
     cell.delegate = self;
     return cell;
@@ -69,7 +68,7 @@
 
 #pragma mark - PIAPIEnvironmentTableViewCellDelegate Methods
 
-- (void)environmentCellSwitchToggled:(UISwitch *)environmentSwitch forEnvironment:(PIAPIEnvironment *)environment
+- (void)environmentCellSwitchToggled:(UISwitch *)environmentSwitch forEnvironment:(id<PIAPIEnvironmentObject>)environment
 {
     self.currentEnvironment = environment;
 
@@ -96,7 +95,7 @@
         sizingCell = [self.tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
     });
 
-    PIAPIEnvironment *environment = self.environments[indexPath.row];
+    id<PIAPIEnvironmentObject> environment = self.environments[indexPath.row];
     [sizingCell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
     [sizingCell setNeedsLayout];
     [sizingCell layoutIfNeeded];

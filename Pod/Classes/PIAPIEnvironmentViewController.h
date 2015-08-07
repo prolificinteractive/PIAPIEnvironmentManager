@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PIAPIEnvironment.h"
+#import "PIAPIEnvironmentManager.h"
 
 @protocol PIAPIEnvironmentViewDelegate <NSObject>
 
 @required
-- (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment;
+- (void)environmentViewDidChangeEnvironment:(id<PIAPIEnvironmentObject>)environment;
 - (void)environmentViewDoneButtonPressed:(id)sender;
 
 @end
@@ -21,6 +21,6 @@
 
 @property (nonatomic, readwrite, weak) id <PIAPIEnvironmentViewDelegate> delegate;
 @property (nonatomic, readwrite, weak) NSArray *environments;
-@property (nonatomic, readwrite, weak) PIAPIEnvironment *currentEnvironment;
+@property (nonatomic, readwrite, weak) id<PIAPIEnvironmentObject>currentEnvironment;
 
 @end

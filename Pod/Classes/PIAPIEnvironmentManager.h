@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "PIAPIEnvironmentEnums.h"
-#import "PIAPIEnvironment.h"
+#import "PIAPIEnvironmentObject.h"
 
 /**
  * User defaults key for API Environment
@@ -27,14 +27,14 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
  *
  *  @param environment The PIAPIEnvironment that is about to be changed
  */
-- (void)environmentManagerWillChangeEnvironment:(PIAPIEnvironment *)environment;
+- (void)environmentManagerWillChangeEnvironment:(id<PIAPIEnvironmentObject>)environmentObject;
 
 /**
  *  Method called when the PIAPIEnvironmentManager did change the environment
  *
  *  @param environment The PIAPIEnvironment that was changed to
  */
-- (void)environmentManagerDidChangeEnvironment:(PIAPIEnvironment *)environment;
+- (void)environmentManagerDidChangeEnvironment:(id<PIAPIEnvironmentObject>)environmentObject;
 
 @end
 
@@ -45,14 +45,7 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
  *
  *  @return current PIAPIEnvironment
  */
-+ (PIAPIEnvironment *)currentEnvironment;
-
-/**
- *  Return the baseURL of the current PIAPIEnvironment
- *
- *  @return NSURL of the current PIAPIEnvironment
- */
-+ (NSURL *)currentEnvironmentURL;
++ (id<PIAPIEnvironmentObject>)currentEnvironment;
 
 /**
  *  Return an array of added environments
@@ -78,14 +71,6 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
 + (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
 
 /**
- *  Add a environment to the manager
- *  Should be called in the your app delegate.
- *
- *  @param environment PIAPIEnvironment to set
- */
-+ (void)addEnvironment:(PIAPIEnvironment *)environment;
-
-/**
  *  Add an array of environments to the manager
  *  Should be called in the your app delegate. (See example project)
  *
@@ -100,7 +85,7 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
  *
  *  @return PIAPIEnvironment from its name. Will return nil if none match
  */
-+ (PIAPIEnvironment *)environmentFromName:(NSString *)name;
++ (id<PIAPIEnvironmentObject>)environmentFromName:(NSString *)name;
 
 /**
  *  Method to present the UI to change the current environment

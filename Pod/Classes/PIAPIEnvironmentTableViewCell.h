@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class PIAPIEnvironment;
+#import "PIAPIEnvironmentObject.h"
+#import "PIAPIEnvironmentManager.h"
 
 @protocol PIAPIEnvironmentTableViewCellDelegate <NSObject>
 
@@ -19,7 +19,7 @@
  *  @param environment       PIAPIEnvironment that corresponds to the UISwitch toggled
  */
 - (void) environmentCellSwitchToggled:(UISwitch *)environmentSwitch
-                       forEnvironment:(PIAPIEnvironment *)environment;
+                       forEnvironment:(id<PIAPIEnvironmentObject>)environment;
 
 @end
 
@@ -27,7 +27,7 @@
 
 @property (nonatomic, readwrite, weak) id<PIAPIEnvironmentTableViewCellDelegate> delegate;
 
-@property (nonatomic, readonly, weak) PIAPIEnvironment *environment;
+@property (nonatomic, readonly, weak) id<PIAPIEnvironmentObject> environment;
 
 /**
  *  Setter method to update PIAPIEnvironmentTableViewCell with data
@@ -35,7 +35,7 @@
  *  @param environment          PIAPIEnvironment to set
  *  @param isCurrentEnvironment BOOL if environment is the current environment
  */
-- (void)setEnvironment:(PIAPIEnvironment *)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment;
+- (void)setEnvironment:(id<PIAPIEnvironmentObject>)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment;
 
 /**
  *  Method that returns the cell's identifier

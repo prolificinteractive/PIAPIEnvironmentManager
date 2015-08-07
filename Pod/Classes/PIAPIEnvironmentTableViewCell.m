@@ -7,7 +7,7 @@
 //
 
 #import "PIAPIEnvironmentTableViewCell.h"
-#import "PIAPIEnvironment.h"
+#import "PIAPIEnvironmentManager.h"
 
 @interface PIAPIEnvironmentTableViewCell()
 
@@ -16,13 +16,13 @@
 @property (nonatomic, weak) IBOutlet UILabel *environmentSummaryLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *environmentSwitch;
 
-@property (nonatomic, weak) PIAPIEnvironment *environment;
+@property (nonatomic, weak) id<PIAPIEnvironmentObject> environment;
 
 @end
 
 @implementation PIAPIEnvironmentTableViewCell
 
-- (void)setEnvironment:(PIAPIEnvironment *)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment
+- (void)setEnvironment:(id<PIAPIEnvironmentObject>)environment isCurrentEnvironment:(BOOL)isCurrentEnvironment
 {
     self.environment                    = environment;
     self.environmentNameLabel.text      = environment.name;

@@ -9,7 +9,7 @@
 /**
  Invoke Events currently supported
  */
-typedef enum PIAPIEnvironmentInvokeEvent {
+typedef NS_ENUM(NSInteger, PIAPIEnvironmentInvokeEvent) {
     /**
      *  No event will present the environment view controller, you must present manually
      */
@@ -21,5 +21,5 @@ typedef enum PIAPIEnvironmentInvokeEvent {
     /*
      *  Swiping two fingers left while in any screen will present the environment view controller
      */
-    PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft,
-} PIAPIEnvironmentInvokeEvent;
+    PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft
+};
