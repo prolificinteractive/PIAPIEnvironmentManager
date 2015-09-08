@@ -218,6 +218,13 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
                                          completion:completion];
 }
 
++ (void)pushEnvironmentViewControllerInNavigationController:(UINavigationController *)navigationController
+                                                   animated:(BOOL)animated
+{
+    [navigationController pushViewController:[PIAPIEnvironmentManager sharedManager].environmentViewController
+                                    animated:animated];
+}
+
 + (PIAPIEnvironment *)environmentFromName:(NSString *)name
 {
     for (PIAPIEnvironment *environment in [PIAPIEnvironmentManager sharedManager].environments) {
