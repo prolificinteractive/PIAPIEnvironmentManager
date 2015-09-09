@@ -113,4 +113,13 @@ extern NSString *const kAPIEnvironmentNameUserDefaultsIdentifier;
                                                 animated:(BOOL)animated
                                               completion:(void (^)(void))completion;
 
+/**
+ *  Pushes the default Environment View Controller onto the input navigation controller's view stack.
+ *
+ *  @param navigationController The navigation controller to present the Environment View Controller.
+ *  @param animated             YES if it should be pushed with an animation; otherwise NO.
+ */
++ (void)pushEnvironmentViewControllerInNavigationController:(nullable UINavigationController *)navigationController
+                                                   animated:(BOOL)animated;
+
 @end
