@@ -17,6 +17,6 @@
 
 @property (nonatomic, strong) NSURL *baseURL;
 
-@property (nonatomic, assign, getter=isDefaultEnvironment) BOOL defaultEnvironment;
+@property (nonatomic, assign) BOOL isDefaultEnvironment;
 
 @end

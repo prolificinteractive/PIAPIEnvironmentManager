@@ -15,30 +15,23 @@
 
 /**
  *  NSURL of your environment
- *
- *  @return NSString
  */
-- (NSURL *)baseURL;
+@property (nonnull, nonatomic, strong) NSURL *baseURL;
 
 /**
  *  Name of your environment. This will display in the UI.
- *
- *  @return NSString
  */
-- (NSString *)name;
+@property (nonnull, nonatomic, copy) NSString *name;
 
 /**
  *  Summary of your environment. This will display in the UI.
- *
- *  @return NSString
  */
-- (NSString *)summary;
+@property (nullable, nonatomic, copy) NSString *summary;
 
 /**
  *  BOOL to to determine if this environment will be the default one selected.
- *
- * @return BOOL
  */
-- (BOOL)isDefaultEnvironment;
+@property (nonatomic, assign) BOOL isDefaultEnvironment;
+
 
 @end

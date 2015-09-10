@@ -8,19 +8,50 @@
 
 #import <UIKit/UIKit.h>
 #import "PIAPIEnvironmentManager.h"
+#import "PIAPIEnvironmentObject.h"
 
+@class PIAPIEnvironmentViewController;
+
+/**
+ Defines an interface for receiving events from the APIEnvironmentViewController.
+ */
 @protocol PIAPIEnvironmentViewDelegate <NSObject>
 
 @required
-- (void)environmentViewDidChangeEnvironment:(id<PIAPIEnvironmentObject>)environment;
-- (void)environmentViewDoneButtonPressed:(id)sender;
+
+/**
+ Notifies that the environment selected has been changed.
+ 
+ @param environment The now-selected API environment.
+ */
+- (void)environmentViewDidChangeEnvironment:(nonnull id<PIAPIEnvironmentObject>)environment;
+
+/**
+ Notifies that the environment received a Done event.
+ 
+ @param sender The environment view controller that received the event.
+ */
+- (void)environmentViewDoneButtonPressed:(nonnull PIAPIEnvironmentViewController *)sender;
 
 @end
 
+/**
+ A view controller for controlling the switching of API environments
+ */
 @interface PIAPIEnvironmentViewController : UITableViewController
 
-@property (nonatomic, readwrite, weak) id <PIAPIEnvironmentViewDelegate> delegate;
-@property (nonatomic, readwrite, weak) NSArray *environments;
-@property (nonatomic, readwrite, weak) id<PIAPIEnvironmentObject>currentEnvironment;
+/**
+ The delegate for the environment view controller.
+ */
+@property (nullable, nonatomic, readwrite, weak) id <PIAPIEnvironmentViewDelegate> delegate;
+
+/**
+ Initializes a new instance of the environment manager view controller using the input environment manager.
+ 
+ @param manager The environment Manager.
+ 
+ @return A new instance.
+ */
+- (nonnull instancetype)initWithEnvironmentManager:(nonnull PIAPIEnvironmentManager *)manager;
 
 @end
