@@ -65,32 +65,4 @@
                       certificateName:certificateName];
 }
 
-#pragma mark - AFNetworking Implementation
-
-- (id <AFURLRequestSerialization> )requestSerializer
-{
-    return [AFJSONRequestSerializer serializer];
-}
-
-- (id <AFURLResponseSerialization> )responseSerializer
-{
-    return [AFJSONResponseSerializer serializer];
-}
-
-- (void)authenticateRequest:(NSURLRequest *)request
-{
-    // Override in subclass
-}
-
-- (NSError *)errorForResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject
-{
-    // Override in subclass
-    return nil;
-}
-
-- (void)responseDidSucceed:(NSHTTPURLResponse *)response responseObject:(id)responseObject
-{
-    // Override in subclass
-}
-
 @end

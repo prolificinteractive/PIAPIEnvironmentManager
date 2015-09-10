@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFNetworking.h>
 #import "PIAPIEnvironmentEnums.h"
 
 @interface PIAPIEnvironment : NSObject
@@ -53,40 +52,5 @@
                             summary:(NSString *)summary
                           isDefault:(BOOL)isDefault
                         certificateName:(NSString *)certificateName;
-
-#pragma mark - AFNetworking Implementation
-
-/**
- * Override the request and response serialization behavior
- * Defaults to AFJSONRequestSerializer/AFJSONResponseSerializer
- */
-- (id <AFURLRequestSerialization> ) requestSerializer;
-- (id <AFURLResponseSerialization> )responseSerializer;
-
-/**
- * Handle any kind of API-specific request authorization
- *  OAuth, basic auth, sessionID, etc
- *
- * @param request NSURLRequest to be authenticated
- */
-- (void)authenticateRequest:(NSMutableURLRequest *)request;
-
-/**
- * Check the response for an error and return it if there is one
- *
- * @param response  NSHTTPURLResponse from API
- * @param id        responseObject JSON object returned from API
- *
- * @return NSError or nil
- */
-- (NSError *)errorForResponse:(NSHTTPURLResponse *)response responseObject:(id)responseObject;
-
-/**
- * Handle any cleanup from the request (e.g. saving tokens, etc)
- *
- * @param response  NSHTTPURLResponse from API
- * @param id        responseObject JSON object returned from API
- */
-- (void)responseDidSucceed:(NSHTTPURLResponse *)response responseObject:(id)responseObject;
 
 @end
