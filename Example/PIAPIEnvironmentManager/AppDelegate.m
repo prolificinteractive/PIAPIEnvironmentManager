@@ -24,19 +24,19 @@
     environmentDEV.name = @"DEV";
     environmentDEV.baseURL = [NSURL URLWithString:kEnvironmentDEVBaseURL];
     environmentDEV.summary = @"This is the DEV environment";
-    environmentDEV.defaultEnvironment = NO;
+    environmentDEV.isDefaultEnvironment = NO;
     
     EnvironmentModel *environmentQA = [EnvironmentModel new];
     environmentQA.name = @"QA";
     environmentQA.baseURL = [NSURL URLWithString:kEnvironmentQABaseURL];
     environmentQA.summary = @"This is the QA environment";
-    environmentQA.defaultEnvironment = NO;
+    environmentQA.isDefaultEnvironment = NO;
 
     EnvironmentModel *environmentPROD = [EnvironmentModel new];
     environmentPROD.name = @"PROD";
     environmentPROD.baseURL = [NSURL URLWithString:kEnvironmentPRODBaseURL];
     environmentPROD.summary = @"This is the PROD environment";
-    environmentPROD.defaultEnvironment = YES;
+    environmentPROD.isDefaultEnvironment = YES;
 
     //add environments to manager
     [PIAPIEnvironmentManager addEnvironments:@[environmentDEV, environmentQA, environmentPROD]];
