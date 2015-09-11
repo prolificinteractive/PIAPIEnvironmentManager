@@ -9,25 +9,19 @@
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentViewController.h"
 #import "PIAPIEnvironmentNavigationController.h"
-#import "PIAPIEnvironment.h"
+
 #import <objc/runtime.h>
 #import <objc/message.h>
 
 NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentName";
 
 @interface PIAPIEnvironmentManager () <PIAPIEnvironmentViewDelegate> {
-    PIAPIEnvironment *_currentEnvironment;
+    id<PIAPIEnvironmentObject> _currentEnvironment;
 }
-
-@property (nonatomic, strong) NSMutableArray *environments;
-@property (nonatomic, strong) PIAPIEnvironmentNavigationController *environmentViewNavController;
-@property (nonatomic, strong) PIAPIEnvironmentViewController *environmentViewController;
-@property (nonatomic, strong) PIAPIEnvironment *currentEnvironment;
 
 @property (nonatomic, strong) UIWindow *environmentWindow;
 
 @property (nonatomic, weak) UIWindow *mainWindow;
-@property (nonatomic, weak) id <PIAPIEnvironmentManagerDelegate> delegate;
 
 
 @property (nonatomic, assign) PIAPIEnvironmentInvokeEvent invokeEvent;
@@ -45,12 +39,21 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
     return environmentManager;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.environments = [NSMutableArray new];
+- (instancetype)init
+{
+    NSArray <id <PIAPIEnvironmentObject>> * _Nonnull environments = [NSArray array];
+    return [self initWithEnvironments:environments];
+}
+
+- (instancetype)initWithEnvironments:(NSArray<id<PIAPIEnvironmentObject>> *)environments
+{
+    if (self = [super init]) {
+        _environments = [NSMutableArray array];
+        [_environments addObjectsFromArray:environments];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
     }
+    
     return self;
 }
 
@@ -76,39 +79,31 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
         //if it desired not to present manually, add to its own window
         if (self.invokeEvent != PIAPIEnvironmentInvokeEventNone){
-            _environmentWindow.rootViewController = self.environmentViewNavController;
-            [_environmentWindow addSubview:self.environmentViewNavController.view];
+            _environmentWindow.rootViewController = [self generateEnvironmentViewControllerStack];
+            [_environmentWindow addSubview:_environmentWindow.rootViewController.view];
         }
     }
     [_environmentWindow makeKeyAndVisible];
     return _environmentWindow;
 }
 
-- (PIAPIEnvironmentNavigationController *)environmentViewNavController {
-    if (!_environmentViewNavController) {
-        _environmentViewNavController = [[PIAPIEnvironmentNavigationController alloc] initWithRootViewController:self.environmentViewController];
-    }
-    return _environmentViewNavController;
+- (PIAPIEnvironmentNavigationController * _Nonnull)generateEnvironmentViewControllerStack
+{
+    PIAPIEnvironmentViewController *environmentViewController = [[PIAPIEnvironmentViewController alloc] initWithEnvironmentManager:self];
+    environmentViewController.delegate = self;
+    PIAPIEnvironmentNavigationController *navigationController = [[PIAPIEnvironmentNavigationController alloc] initWithRootViewController:environmentViewController];
+    
+    return navigationController;
 }
 
-- (PIAPIEnvironmentViewController *)environmentViewController {
-    if (!_environmentViewController) {
-        _environmentViewController = [PIAPIEnvironmentViewController new];
-        _environmentViewController.environments = self.environments;
-        _environmentViewController.delegate = self;
-    }
-    _environmentViewController.currentEnvironment = self.currentEnvironment;
-    return _environmentViewController;
-}
-
-- (PIAPIEnvironment *)currentEnvironment {
+- (id<PIAPIEnvironmentObject>)currentEnvironment {
     if (!_currentEnvironment) {
         _currentEnvironment = [self environmentFromUserDefaults];
     }
     return _currentEnvironment;
 }
 
-- (void)setCurrentEnvironment:(PIAPIEnvironment *)currentEnvironment
+- (void)setCurrentEnvironment:(id<PIAPIEnvironmentObject>)currentEnvironment
 {
     if (_currentEnvironment == currentEnvironment) {
         return;
@@ -134,12 +129,12 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
     return [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentNameUserDefaultsIdentifier];
 }
         
-- (PIAPIEnvironment *)environmentFromUserDefaults
+- (id<PIAPIEnvironmentObject>)environmentFromUserDefaults
 {
     return [PIAPIEnvironmentManager environmentFromName:[self environmentNameFromUserDefaults]];
 }
 
-- (void)setUserDefaultsEnvironment:(PIAPIEnvironment *)environment
+- (void)setUserDefaultsEnvironment:(id<PIAPIEnvironmentObject>)environment
 {
     if (![[self environmentNameFromUserDefaults] isEqualToString:environment.name]) {
         [[NSUserDefaults standardUserDefaults] setObject:environment.name
@@ -149,14 +144,9 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 #pragma mark - Public Methods
 
-+ (PIAPIEnvironment *)currentEnvironment
++ (id<PIAPIEnvironmentObject>)currentEnvironment
 {
     return [PIAPIEnvironmentManager sharedManager].currentEnvironment;
-}
-
-+ (NSURL *)currentEnvironmentURL
-{
-    return [PIAPIEnvironmentManager sharedManager].currentEnvironment.baseURL;
 }
 
 + (NSArray *)environments
@@ -191,43 +181,16 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
     [PIAPIEnvironmentManager sharedManager].delegate = delegate;
 }
 
-+ (void)addEnvironment:(PIAPIEnvironment *)environment
++ (void)addEnvironments:(NSArray *)environments
 {
-    PIAPIEnvironmentManager *sharedManager = [PIAPIEnvironmentManager sharedManager];
-    [sharedManager.environments addObject:environment];
-
-    if (environment.isDefault) {
-        //The defaultEnvironmentType is not saved if we have a stored environment to remember last environment
-        if (!sharedManager.currentEnvironment){
-            sharedManager.currentEnvironment = environment;
-        }
+    for (id<PIAPIEnvironmentObject> environment in environments){
+        [PIAPIEnvironmentManager addEnvironment:environment];
     }
 }
 
-+ (void)addEnvironments:(NSArray *)environments
++ (id<PIAPIEnvironmentObject>)environmentFromName:(NSString *)name
 {
-    [[PIAPIEnvironmentManager sharedManager].environments addObjectsFromArray:environments];
-}
-
-+ (void)presentEnvironmentViewControllerInViewController:(UIViewController *)viewController
-                                                animated:(BOOL)animated
-                                             completion:(void (^)(void))completion
-{
-    [viewController presentViewController:[PIAPIEnvironmentManager sharedManager].environmentViewNavController
-                                          animated:animated
-                                         completion:completion];
-}
-
-+ (void)pushEnvironmentViewControllerInNavigationController:(UINavigationController *)navigationController
-                                                   animated:(BOOL)animated
-{
-    [navigationController pushViewController:[PIAPIEnvironmentManager sharedManager].environmentViewController
-                                    animated:animated];
-}
-
-+ (PIAPIEnvironment *)environmentFromName:(NSString *)name
-{
-    for (PIAPIEnvironment *environment in [PIAPIEnvironmentManager sharedManager].environments) {
+    for (id<PIAPIEnvironmentObject> environment in [PIAPIEnvironmentManager sharedManager].environments) {
         if ([name isEqualToString:environment.name]) {
             return environment;
         }
@@ -252,47 +215,53 @@ NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentNa
 
 - (void)showEnvironmentView
 {
-    CGRect originalFrame = self.environmentWindow.frame;
-    originalFrame.origin.y += originalFrame.size.height;
-    self.environmentViewNavController.view.frame = originalFrame;
+    self.environmentWindow.alpha = 0.0f;
+    [self.environmentWindow makeKeyAndVisible];
 
-    [UIView animateWithDuration:0.25f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         self.environmentViewNavController.view.frame = _environmentWindow.frame;
-                     } completion:nil];
+    [UIView animateWithDuration:0.2f animations:^{
+        self.environmentWindow.alpha = 1.0f;
+    }];
 }
 
-- (void)dismissEnvironmentView {
-    CGRect animatedFrame = self.environmentWindow.frame;
-    animatedFrame.origin.y += self.environmentWindow.frame.size.height;
-    [UIView animateWithDuration:0.25f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         self.environmentViewNavController.view.frame = animatedFrame;
-                     } completion: ^(BOOL finished) {
-                         self.environmentWindow.hidden = YES;
-                     }];
+- (void)dismissEnvironmentView
+{
+    [UIView animateWithDuration:0.2f animations:^{
+        self.environmentWindow.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.environmentWindow resignKeyWindow];
+    }];
+}
+
++ (void)addEnvironment:(id<PIAPIEnvironmentObject>)environmentObject
+{
+    NSAssert([environmentObject conformsToProtocol:@protocol(PIAPIEnvironmentObject)],
+             @"Custom environment object must conform to <PIAPIEnvironmentObject>");
+
+    PIAPIEnvironmentManager *sharedManager = [PIAPIEnvironmentManager sharedManager];
+    [sharedManager.environments addObject:environmentObject];
+
+    if ([environmentObject isDefaultEnvironment]) {
+        //The defaultEnvironmentType is not saved if we have a stored environment to remember last environment
+        if (!sharedManager.currentEnvironment){
+            sharedManager.currentEnvironment = environmentObject;
+        }
+    }
 }
 
 #pragma mark - PIAPIEnvironmentViewDelegate Methods
 
-- (void)environmentViewDidChangeEnvironment:(PIAPIEnvironment *)environment
+- (void)environmentViewDidChangeEnvironment:(id<PIAPIEnvironmentObject>)environment
 {
     self.currentEnvironment = environment;
 }
 
-- (void)environmentViewDoneButtonPressed:(id)sender
+- (void)environmentViewDoneButtonPressed:(PIAPIEnvironmentViewController *)sender
 {
     if (self.invokeEvent == PIAPIEnvironmentInvokeEventNone){
-        [self.environmentViewNavController.presentingViewController dismissViewControllerAnimated:YES
-                                                                                       completion:nil];
+        [sender dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self dismissEnvironmentView];
     }
-
 }
 
 #pragma mark - Swizzled Methods

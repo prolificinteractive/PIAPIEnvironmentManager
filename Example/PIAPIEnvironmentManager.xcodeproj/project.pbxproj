@@ -14,6 +14,7 @@
 		ED032CA01A6E9A9400E37639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED032C9F1A6E9A9400E37639 /* Images.xcassets */; };
 		ED032CA31A6E9A9400E37639 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */; };
 		ED032CAF1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */; };
+		ED78D3221B750D7300751613 /* EnvironmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED78D3211B750D7300751613 /* EnvironmentModel.m */; };
 		EEE77916DDF71A2D4ECD67A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB3A16443FD374D62FDB02F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,8 @@
 		ED032CAD1A6E9A9400E37639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED032CAE1A6E9A9400E37639 /* PIAPIEnvironmentManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentManagerTests.m; sourceTree = "<group>"; };
 		ED05E5CA1A73FB9800835133 /* PIAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIAPIConstants.h; sourceTree = "<group>"; };
+		ED78D3201B750D7300751613 /* EnvironmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentModel.h; sourceTree = "<group>"; };
+		ED78D3211B750D7300751613 /* EnvironmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,8 @@
 				ED032C971A6E9A9400E37639 /* AppDelegate.m */,
 				ED032C991A6E9A9400E37639 /* ViewController.h */,
 				ED032C9A1A6E9A9400E37639 /* ViewController.m */,
+				ED78D3201B750D7300751613 /* EnvironmentModel.h */,
+				ED78D3211B750D7300751613 /* EnvironmentModel.m */,
 				ED032C9C1A6E9A9400E37639 /* Main.storyboard */,
 				ED032C9F1A6E9A9400E37639 /* Images.xcassets */,
 				ED032CA11A6E9A9400E37639 /* LaunchScreen.xib */,
@@ -283,6 +288,7 @@
 				ED032C9B1A6E9A9400E37639 /* ViewController.m in Sources */,
 				ED032C981A6E9A9400E37639 /* AppDelegate.m in Sources */,
 				ED032C951A6E9A9400E37639 /* main.m in Sources */,
+				ED78D3221B750D7300751613 /* EnvironmentModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

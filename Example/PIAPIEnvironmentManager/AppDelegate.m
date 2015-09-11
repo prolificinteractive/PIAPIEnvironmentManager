@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PIAPIConstants.h"
+#import "EnvironmentModel.h"
 #import <PIAPIEnvironmentManager/PIAPIEnvironmentManager.h>
 
 @implementation AppDelegate
@@ -19,18 +20,24 @@
 
 - (void)setupAPIEnvironments {
     //create environments
-    PIAPIEnvironment *environmentDEV = [PIAPIEnvironment environmentWithName:@"DEV"
-                                                                     baseURL:[NSURL URLWithString:kEnvironmentDEVBaseURL]
-                                                                     summary:@"This is the dev environment"
-                                                                   isDefault:NO];
-    PIAPIEnvironment *environmentQA = [PIAPIEnvironment environmentWithName:@"QA"
-                                                                    baseURL:[NSURL URLWithString:kEnvironmentQABaseURL]
-                                                                    summary:@"This is the QA environment"
-                                                                  isDefault:NO];
-    PIAPIEnvironment *environmentPROD = [PIAPIEnvironment environmentWithName:@"PROD"
-                                                                      baseURL:[NSURL URLWithString:kEnvironmentPRODBaseURL]
-                                                                      summary:@"This is the production environment"
-                                                                    isDefault:YES];
+    EnvironmentModel *environmentDEV = [EnvironmentModel new];
+    environmentDEV.name = @"DEV";
+    environmentDEV.baseURL = [NSURL URLWithString:kEnvironmentDEVBaseURL];
+    environmentDEV.summary = @"This is the DEV environment";
+    environmentDEV.isDefaultEnvironment = NO;
+    
+    EnvironmentModel *environmentQA = [EnvironmentModel new];
+    environmentQA.name = @"QA";
+    environmentQA.baseURL = [NSURL URLWithString:kEnvironmentQABaseURL];
+    environmentQA.summary = @"This is the QA environment";
+    environmentQA.isDefaultEnvironment = NO;
+
+    EnvironmentModel *environmentPROD = [EnvironmentModel new];
+    environmentPROD.name = @"PROD";
+    environmentPROD.baseURL = [NSURL URLWithString:kEnvironmentPRODBaseURL];
+    environmentPROD.summary = @"This is the PROD environment";
+    environmentPROD.isDefaultEnvironment = YES;
+
     //add environments to manager
     [PIAPIEnvironmentManager addEnvironments:@[environmentDEV, environmentQA, environmentPROD]];
 

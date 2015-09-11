@@ -1,0 +1,14 @@
+PODS:
+  - PIAPIEnvironmentManager (0.3.0)
+
+DEPENDENCIES:
+  - PIAPIEnvironmentManager (from `../`)
+
+EXTERNAL SOURCES:
+  PIAPIEnvironmentManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  PIAPIEnvironmentManager: 60751392abcc121c76c2e0a81c1f7376468d3590
+
+COCOAPODS: 0.38.2
