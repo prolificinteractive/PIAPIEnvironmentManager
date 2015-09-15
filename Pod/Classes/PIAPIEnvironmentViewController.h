@@ -20,13 +20,6 @@
 @required
 
 /**
- Notifies that the environment selected has been changed.
- 
- @param environment The now-selected API environment.
- */
-- (void)environmentViewDidChangeEnvironment:(nonnull id<PIAPIEnvironmentObject>)environment;
-
-/**
  Notifies that the environment received a Done event.
  
  @param sender The environment view controller that received the event.

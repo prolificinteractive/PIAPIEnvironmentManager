@@ -10,13 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "PIAPIEnvironmentEnums.h"
 #import "PIAPIEnvironmentObject.h"
-
-/**
- * User defaults key for API Environment
- * To include environment switching in the Settings bundle, add an item with this key
- * Values should correspond to the enviornment name set in PIAPIEnvironment
- */
-extern NSString * _Nonnull const kAPIEnvironmentNameUserDefaultsIdentifier;
+#import "PIAPIEnvironmentCacheProvider.h"
 
 @protocol PIAPIEnvironmentManagerDelegate <NSObject>
 
@@ -54,12 +48,7 @@ extern NSString * _Nonnull const kAPIEnvironmentNameUserDefaultsIdentifier;
 @property (nonnull, nonatomic, strong) id<PIAPIEnvironmentObject> currentEnvironment;
 
 /**
- *  All accessible environments.
- */
-@property (nonnull, nonatomic, strong, readonly) NSMutableArray <id<PIAPIEnvironmentObject>> *environments;
-
-/**
- *  Initializes a new instance of PIAPIEnvironmentManager with the input environments.
+ *  Initializes a new instance of PIAPIEnvironmentManager with the input environments and default cache.
  *
  *  @param environments The environments.
  *
@@ -68,34 +57,29 @@ extern NSString * _Nonnull const kAPIEnvironmentNameUserDefaultsIdentifier;
 - (nonnull instancetype)initWithEnvironments:(nonnull NSArray <id<PIAPIEnvironmentObject>> *)environments;
 
 /**
- *  Return the current PIAPIEnvironment that is selected
+ *  Initializes a new instance of PIAPIEnvironmentManager with the input environments and cache.
  *
- *  @return current PIAPIEnvironment
+ *  @param environments     The environments.
+ *  @params cacheProvider   The cache provider.
+ *
+ *  @return A new instance of PIAPIEnvironmentManager.
  */
-+ (_Nonnull id<PIAPIEnvironmentObject>)currentEnvironment;
+- (nonnull instancetype)initWithEnvironments:(nonnull NSArray<id<PIAPIEnvironmentObject>> *)environments
+                               cacheProvider:(nonnull id<PIAPIEnvironmentCacheProvider>)cacheProvider;
 
 /**
- *  Return an array of added environments
- *
- *  @return NSArray of added PIAPIEnvironments
+ *  Adds the input environment to the environment list.
+ *  
+ *  @param environment  The environment to add.
  */
-+ ( NSArray * _Nonnull )environments;
+- (void)addEnvironment:(nonnull id<PIAPIEnvironmentObject>)environment;
 
 /**
- *  Return a PIAPIEnvironment from the its name
+ *  All accessible environments.
  *
- *  @param name NSString the name of the environment
- *
- *  @return PIAPIEnvironment from its name. Will return nil if none match
+ *  @return All environments.
  */
-+ (void) setDelegate: (nonnull id<PIAPIEnvironmentManagerDelegate>)delegate;
-
-/**
- *  Set the PIAPIEnvironmentInvokeEvent to present the Environment View
- *
- *  @param invokeEvent PIAPIEnvironmentInvokeEvent that will be triggered
- */
-+ (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent;
+- (nonnull NSArray<id<PIAPIEnvironmentObject>> *)allEnvironments;
 
 /**
  *  Add an array of environments to the manager
@@ -103,15 +87,7 @@ extern NSString * _Nonnull const kAPIEnvironmentNameUserDefaultsIdentifier;
  *
  *  @param environments NSArray of PIAPIEnvironments to set
  */
-+ (void)addEnvironments:(NSArray * _Nonnull)environments;
+- (void)addEnvironments:(NSArray <id<PIAPIEnvironmentObject>> * _Nonnull)environments;
 
-/**
- *  Return a PIAPIEnvironment from the its name
- *
- *  @param name NSString the name of the environment
- *
- *  @return PIAPIEnvironment from its name. Will return nil if none match
- */
-+ (nullable id<PIAPIEnvironmentObject>)environmentFromName:(NSString * _Nonnull)name;
 
 @end

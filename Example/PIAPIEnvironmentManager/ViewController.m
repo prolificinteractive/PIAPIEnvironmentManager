@@ -9,7 +9,7 @@
 #import "EnvironmentModel.h"
 #import "ViewController.h"
 
-#import <PIAPIEnvironmentManager/PIAPIEnvironmentManager.h>
+#import "PIExampleEnvironmentManager.h"
 
 @interface ViewController () <PIAPIEnvironmentManagerDelegate>
 
@@ -25,17 +25,14 @@
 {
     [super viewDidLoad];
 
-    PIAPIEnvironmentManager.delegate = self;
+    [PIExampleEnvironmentManager defaultEnvironmentManager].delegate = self;
 }
 
 #pragma mark - Action Methods
 
 - (IBAction)updateURLButtonPressed:(id)sender
 {
-    if ([[PIAPIEnvironmentManager currentEnvironment] isKindOfClass:[EnvironmentModel class]]){
-        EnvironmentModel *environment = (EnvironmentModel *)[PIAPIEnvironmentManager currentEnvironment];
-        self.currentURLLabel.text = environment.baseURL.absoluteString;
-    }
+    self.currentURLLabel.text = [[PIExampleEnvironmentManager defaultEnvironmentManager].currentEnvironment name];
 }
 
 #pragma mark - <PIAPIEnvironmentManagerDelegate>
