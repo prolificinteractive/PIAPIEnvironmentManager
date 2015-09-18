@@ -9,289 +9,129 @@
 #import "PIAPIEnvironmentManager.h"
 #import "PIAPIEnvironmentViewController.h"
 #import "PIAPIEnvironmentNavigationController.h"
+#import "PIUserDefaultCache.h"
 
-#import <objc/runtime.h>
-#import <objc/message.h>
+@interface PIAPIEnvironmentManager ()
 
-NSString *const kAPIEnvironmentNameUserDefaultsIdentifier = @"PIAPIEnvironmentName";
+@property (nonnull, nonatomic, strong) id<PIAPIEnvironmentCacheProvider> cache;
 
-@interface PIAPIEnvironmentManager () <PIAPIEnvironmentViewDelegate> {
-    id<PIAPIEnvironmentObject> _currentEnvironment;
-}
-
-@property (nonatomic, strong) UIWindow *environmentWindow;
-
-@property (nonatomic, weak) UIWindow *mainWindow;
-
-
-@property (nonatomic, assign) PIAPIEnvironmentInvokeEvent invokeEvent;
+@property (nonnull, nonatomic, strong, readonly) NSMutableArray <id<PIAPIEnvironmentObject>> *environments;
 
 @end
 
 @implementation PIAPIEnvironmentManager
 
-+ (instancetype)sharedManager {
-    static PIAPIEnvironmentManager *environmentManager;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        environmentManager = [PIAPIEnvironmentManager new];
-    });
-    return environmentManager;
-}
-
 - (instancetype)init
 {
-    NSArray <id <PIAPIEnvironmentObject>> * _Nonnull environments = [NSArray array];
-    return [self initWithEnvironments:environments];
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"APIEnvironmentManager must be initialized using %@", NSStringFromSelector(@selector(initWithEnvironments:))]
+                                 userInfo:nil];
 }
 
 - (instancetype)initWithEnvironments:(NSArray<id<PIAPIEnvironmentObject>> *)environments
 {
+    NSAssert(environments.count > 0, @"Cannot initialize PIAPIEnvironmentManager with 0 environments.");
+    PIUserDefaultCache *defaultCache = [[PIUserDefaultCache alloc] init];
+    return [self initWithEnvironments:environments cacheProvider:defaultCache];
+}
+
+- (instancetype)initWithEnvironments:(NSArray<id<PIAPIEnvironmentObject>> *)environments
+                       cacheProvider:(id<PIAPIEnvironmentCacheProvider>)cacheProvider
+{
     if (self = [super init]) {
-        _environments = [NSMutableArray array];
-        [_environments addObjectsFromArray:environments];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
+        _environments = [NSMutableArray arrayWithArray:environments];
+
+        self.cache = cacheProvider;
+        [self setDefaultEnvironmentFromCacheIfNeeded];
     }
-    
+
     return self;
 }
 
-- (void)dealloc
+// Retrieves the currently cached environment and sets the current environment from it.
+// If no cached environment is found, it is set to the first environment in the list.
+- (void)setDefaultEnvironmentFromCacheIfNeeded
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSUserDefaultsDidChangeNotification object:nil];
-}
+    if (!self.currentEnvironment) {
+        id <PIAPIEnvironmentObject> currentEnvironment = [self environmentFromCache];
 
-#pragma mark - Custom Accessors
-
-- (UIWindow *)mainWindow {
-    if (!_mainWindow) {
-         _mainWindow = [[[UIApplication sharedApplication] delegate] window];
-    }
-    return _mainWindow;
-}
-
-- (UIWindow *)environmentWindow
-{
-    if (!_environmentWindow) {
-        _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [_environmentWindow setWindowLevel:UIWindowLevelNormal];
-
-        //if it desired not to present manually, add to its own window
-        if (self.invokeEvent != PIAPIEnvironmentInvokeEventNone){
-            _environmentWindow.rootViewController = [self generateEnvironmentViewControllerStack];
-            [_environmentWindow addSubview:_environmentWindow.rootViewController.view];
+        if (!currentEnvironment && self.environments.count > 0) {
+            self.currentEnvironment = self.environments[0];
+            [self cacheCurrentEnvironment:self.currentEnvironment];
+        } else if (currentEnvironment) {
+            self.currentEnvironment = currentEnvironment;
         }
     }
-    [_environmentWindow makeKeyAndVisible];
-    return _environmentWindow;
-}
-
-- (PIAPIEnvironmentNavigationController * _Nonnull)generateEnvironmentViewControllerStack
-{
-    PIAPIEnvironmentViewController *environmentViewController = [[PIAPIEnvironmentViewController alloc] initWithEnvironmentManager:self];
-    environmentViewController.delegate = self;
-    PIAPIEnvironmentNavigationController *navigationController = [[PIAPIEnvironmentNavigationController alloc] initWithRootViewController:environmentViewController];
-    
-    return navigationController;
-}
-
-- (id<PIAPIEnvironmentObject>)currentEnvironment {
-    if (!_currentEnvironment) {
-        _currentEnvironment = [self environmentFromUserDefaults];
-    }
-    return _currentEnvironment;
 }
 
 - (void)setCurrentEnvironment:(id<PIAPIEnvironmentObject>)currentEnvironment
 {
-    if (_currentEnvironment == currentEnvironment) {
-        return;
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
-        [self.delegate environmentManagerWillChangeEnvironment:currentEnvironment];
-    }
+    if (_currentEnvironment != currentEnvironment) {
+        if ([self.delegate respondsToSelector:@selector(environmentManagerWillChangeEnvironment:)]) {
+            [self.delegate environmentManagerWillChangeEnvironment:currentEnvironment];
+        }
 
-    _currentEnvironment = currentEnvironment;
+        _currentEnvironment = currentEnvironment;
 
-    if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
-        [self.delegate environmentManagerDidChangeEnvironment:currentEnvironment];
+        if ([self.delegate respondsToSelector:@selector(environmentManagerDidChangeEnvironment:)]) {
+            [self.delegate environmentManagerDidChangeEnvironment:currentEnvironment];
+        }
     }
 
-    [self setUserDefaultsEnvironment:currentEnvironment];
+    [self cacheCurrentEnvironment:currentEnvironment];
 }
 
-#pragma mark - User Defaults
-
-- (NSString *)environmentNameFromUserDefaults
+- (NSArray *)allEnvironments
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:kAPIEnvironmentNameUserDefaultsIdentifier];
-}
-        
-- (id<PIAPIEnvironmentObject>)environmentFromUserDefaults
-{
-    return [PIAPIEnvironmentManager environmentFromName:[self environmentNameFromUserDefaults]];
+    return [self.environments copy];
 }
 
-- (void)setUserDefaultsEnvironment:(id<PIAPIEnvironmentObject>)environment
+- (void)addEnvironment:(id<PIAPIEnvironmentObject>)environmentObject
 {
-    if (![[self environmentNameFromUserDefaults] isEqualToString:environment.name]) {
-        [[NSUserDefaults standardUserDefaults] setObject:environment.name
-                                                  forKey:kAPIEnvironmentNameUserDefaultsIdentifier];
+    [self.environments addObject:environmentObject];
+    [self setDefaultEnvironmentFromCacheIfNeeded];
+}
+
+- (void)addEnvironments:(NSArray <id<PIAPIEnvironmentObject>>*)environments
+{
+    for (id<PIAPIEnvironmentObject> environment in environments) {
+        [self addEnvironment:environment];
     }
 }
 
-#pragma mark - Public Methods
-
-+ (id<PIAPIEnvironmentObject>)currentEnvironment
+- (nonnull id<PIAPIEnvironmentObject>)environmentFromName:(NSString *)name
 {
-    return [PIAPIEnvironmentManager sharedManager].currentEnvironment;
-}
-
-+ (NSArray *)environments
-{
-    return [[PIAPIEnvironmentManager sharedManager].environments copy];
-}
-
-+ (void)setInvokeEvent:(PIAPIEnvironmentInvokeEvent)invokeEvent
-{
-    PIAPIEnvironmentManager *sharedManager = [PIAPIEnvironmentManager sharedManager];
-    sharedManager.invokeEvent = invokeEvent;
-
-    if (invokeEvent == PIAPIEnvironmentInvokeEventShake) {
-        __block IMP originalIMP = PIReplaceMethodWithBlock([UIWindow class], @selector(motionEnded:withEvent:), ^(UIWindow *_self, UIEventSubtype motion, UIEvent *event) {
-            if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake) {
-                [sharedManager showEnvironmentView];
-            }
-
-            ((void (*)(id, SEL, UIEventSubtype, UIEvent *))originalIMP)(_self, @selector(motionEnded:withEvent:), motion, event);
-        });
-    }
-    else if (invokeEvent == PIAPIEnvironmentInvokeEventTwoFingersSwipeLeft) {
-        UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showEnvironmentView)];
-        swipeGesture.numberOfTouchesRequired = 2;
-        swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-        [sharedManager.mainWindow addGestureRecognizer:swipeGesture];
-    }
-}
-
-+ (void)setDelegate:(id<PIAPIEnvironmentManagerDelegate>)delegate
-{
-    [PIAPIEnvironmentManager sharedManager].delegate = delegate;
-}
-
-+ (void)addEnvironments:(NSArray *)environments
-{
-    for (id<PIAPIEnvironmentObject> environment in environments){
-        [PIAPIEnvironmentManager addEnvironment:environment];
-    }
-}
-
-+ (id<PIAPIEnvironmentObject>)environmentFromName:(NSString *)name
-{
-    for (id<PIAPIEnvironmentObject> environment in [PIAPIEnvironmentManager sharedManager].environments) {
+    for (id<PIAPIEnvironmentObject> environment in self.environments) {
         if ([name isEqualToString:environment.name]) {
             return environment;
         }
     }
+
     return nil;
 }
 
-#pragma mark - Notifications
+#pragma mark - Cache
 
-- (void)userDefaultsDidChange
+- (nullable NSString *)environmentNameFromCache
 {
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    self.currentEnvironment = [self environmentFromUserDefaults];
+    return [self.cache retrieveCachedEnvironment];
 }
-
-#pragma mark - Private Methods
-
-+ (void)showEnvironmentView
+        
+- (nullable id<PIAPIEnvironmentObject>)environmentFromCache
 {
-    [[PIAPIEnvironmentManager sharedManager] showEnvironmentView];
-}
+    NSString *cachedEnvironment = [self environmentNameFromCache];
 
-- (void)showEnvironmentView
-{
-    self.environmentWindow.alpha = 0.0f;
-    [self.environmentWindow makeKeyAndVisible];
-
-    [UIView animateWithDuration:0.2f animations:^{
-        self.environmentWindow.alpha = 1.0f;
-    }];
-}
-
-- (void)dismissEnvironmentView
-{
-    [UIView animateWithDuration:0.2f animations:^{
-        self.environmentWindow.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [self.environmentWindow resignKeyWindow];
-    }];
-}
-
-+ (void)addEnvironment:(id<PIAPIEnvironmentObject>)environmentObject
-{
-    NSAssert([environmentObject conformsToProtocol:@protocol(PIAPIEnvironmentObject)],
-             @"Custom environment object must conform to <PIAPIEnvironmentObject>");
-
-    PIAPIEnvironmentManager *sharedManager = [PIAPIEnvironmentManager sharedManager];
-    [sharedManager.environments addObject:environmentObject];
-
-    if ([environmentObject isDefaultEnvironment]) {
-        //The defaultEnvironmentType is not saved if we have a stored environment to remember last environment
-        if (!sharedManager.currentEnvironment){
-            sharedManager.currentEnvironment = environmentObject;
-        }
+    if (cachedEnvironment) {
+        return [self environmentFromName:cachedEnvironment];
     }
+
+    return nil;
 }
 
-#pragma mark - PIAPIEnvironmentViewDelegate Methods
-
-- (void)environmentViewDidChangeEnvironment:(id<PIAPIEnvironmentObject>)environment
+- (void)cacheCurrentEnvironment:(id<PIAPIEnvironmentObject>)environment
 {
-    self.currentEnvironment = environment;
+    [self.cache cacheEnvironment:[environment name]];
 }
 
-- (void)environmentViewDoneButtonPressed:(PIAPIEnvironmentViewController *)sender
-{
-    if (self.invokeEvent == PIAPIEnvironmentInvokeEventNone){
-        [sender dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self dismissEnvironmentView];
-    }
-}
-
-#pragma mark - Swizzled Methods
-
-/**
- *  Method to use for swizzling
- *  Reference: http://petersteinberger.com/blog/2014/a-story-about-swizzling-the-right-way-and-touch-forwarding/
- *
- *  @param aClass  Class that will be overriding the original selector
- *  @param origSEL original selector that will be overiding
- *  @param block   Block to trigger in place of original selector
- */
-static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block)
-{
-    NSCParameterAssert(block);
-
-    // get original method
-    Method origMethod = class_getInstanceMethod(aClass, origSEL);
-    NSCParameterAssert(origMethod);
-
-    // convert block to IMP trampoline and replace method implementation
-    IMP newIMP = imp_implementationWithBlock(block);
-
-    // Try adding the method if not yet in the current class
-    if (!class_addMethod(aClass, origSEL, newIMP, method_getTypeEncoding(origMethod))) {
-        return method_setImplementation(origMethod, newIMP);
-    }
-    else {
-        return method_getImplementation(origMethod);
-    }
-}
 
 @end

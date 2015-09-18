@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Julio Rivera on 8/22/15.
-//
+//  Copyright (c) 2015 Prolific Interactive. All rights reserved
 //
 
 /**
@@ -27,11 +27,6 @@
  *  Summary of your environment. This will display in the UI.
  */
 @property (nullable, nonatomic, copy) NSString *summary;
-
-/**
- *  BOOL to to determine if this environment will be the default one selected.
- */
-@property (nonatomic, assign) BOOL isDefaultEnvironment;
 
 
 @end

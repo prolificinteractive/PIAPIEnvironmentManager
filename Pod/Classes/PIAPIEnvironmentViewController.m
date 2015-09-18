@@ -14,7 +14,6 @@
 @interface PIAPIEnvironmentViewController() <PIAPIEnvironmentTableViewCellDelegate>
 
 @property (nonnull, nonatomic, strong) PIAPIEnvironmentManager *environmentManager;
-@property (nonnull, nonatomic, strong) id<PIAPIEnvironmentObject> currentEnvironment;
 
 @end
 
@@ -34,9 +33,10 @@
 
     self.title = @"Environments";
 
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"]];
+    NSString *resourcePath = [[NSBundle bundleForClass:[PIAPIEnvironmentTableViewCell class]] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:resourcePath];
 
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:bundle];
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:resourceBundle];
 
     [self.tableView registerNib:cellNib
          forCellReuseIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
@@ -50,26 +50,25 @@
 
 - (void)setCurrentEnvironment:(nonnull id<PIAPIEnvironmentObject>)currentEnvironment
 {
-    _currentEnvironment = currentEnvironment;
-    
-    if ([self.delegate respondsToSelector:@selector(environmentViewDidChangeEnvironment:)]) {
-        [self.delegate environmentViewDidChangeEnvironment:currentEnvironment];
-    }
+    self.environmentManager.currentEnvironment = currentEnvironment;
 }
 
 #pragma mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.environmentManager.environments.count;
+    return self.environmentManager.allEnvironments.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PIAPIEnvironmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier] forIndexPath:indexPath];
    
-    id<PIAPIEnvironmentObject> environment = self.environmentManager.environments[indexPath.row];
-    
-    [cell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
+    id<PIAPIEnvironmentObject> environment = self.environmentManager.allEnvironments[indexPath.row];
+
+    NSString *currentEnvironmentName = [self.environmentManager.currentEnvironment name];
+    BOOL isCurrentEnvironment = [currentEnvironmentName isEqualToString:[environment name]];
+
+    [cell setEnvironment:environment isCurrentEnvironment:isCurrentEnvironment];
     cell.delegate = self;
     return cell;
 }
@@ -110,8 +109,8 @@
         sizingCell = [self.tableView dequeueReusableCellWithIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
     });
 
-    id<PIAPIEnvironmentObject> environment = self.environmentManager.environments[indexPath.row];
-    [sizingCell setEnvironment:environment isCurrentEnvironment:([self.currentEnvironment isEqual:environment])];
+    id<PIAPIEnvironmentObject> environment = self.environmentManager.allEnvironments[indexPath.row];
+    [sizingCell setEnvironment:environment isCurrentEnvironment:([self.environmentManager.currentEnvironment isEqual:environment])];
     [sizingCell setNeedsLayout];
     [sizingCell layoutIfNeeded];
     return ([sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize]).height;
