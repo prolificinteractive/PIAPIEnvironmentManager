@@ -1,0 +1,25 @@
+{
+  "name": "PIAPIEnvironmentManager",
+  "version": "0.3.0",
+  "summary": "PiOS PIAPIEnvironmentManager pod to help Prolific iOS Engineers manage API Environments.",
+  "description": "PiOS PIAPIEnvironmentManager pod to help Prolific iOS Engineers manage API Environments.",
+  "homepage": "https://bitbucket.org/prolificinteractive/piapienvironmentmanager",
+  "license": "MIT",
+  "authors": {
+    "Julio Rivera": "julio@prolificinteractive.com"
+  },
+  "source": {
+    "git": "git@bitbucket.org:prolificinteractive/piapienvironmentmanager.git",
+    "tag": "0.3.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes",
+  "resource_bundles": {
+    "PIAPIEnvironmentManager": [
+      "Pod/Views/*.xib"
+    ]
+  }
+}

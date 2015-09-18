@@ -1,0 +1,618 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01966C0C16D8C817FC780BD728DEE438 /* PIAPIEnvironmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC9B8E33DDF9E4BA04A29FD791385D84 /* PIAPIEnvironmentViewController.h */; };
+		08D00C8A37AC84458ACE4E15E1C84005 /* PIAPIEnvironmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 29F3EEAF87754F1FF3E80D9B068D95F0 /* PIAPIEnvironmentManager.h */; };
+		10FB2AFF043655AD1A5A2E851AF8135D /* PIAPIEnvironmentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 605EF29326A563BCF56B66126CF583FA /* PIAPIEnvironmentNavigationController.m */; };
+		2C6A5EC6ADAB62DBE6A77D29B013E4E7 /* PIUserDefaultCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 72DE67131BADA83AD8C6721E73807FF2 /* PIUserDefaultCache.m */; };
+		3496D2A77631B60D94E1FE0ED6821D12 /* PIAPIEnvironmentObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E3C251179CEE1779DE602659F6F38D38 /* PIAPIEnvironmentObject.h */; };
+		39BA54C4A1FC89D8EE431E804E48C501 /* PIAPIEnvironmentCacheProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = D42F683D6F6DD2171C98A7186D00D977 /* PIAPIEnvironmentCacheProvider.h */; };
+		599417B93413875C4734ABDDC6DCC2B1 /* PIInvokeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA47329AA5B256FB89A03FFE8539EBFC /* PIInvokeManager.m */; };
+		5C0C5C63CE99F8D52921F4EAC11A1044 /* PIAPIEnvironmentTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D565C1CE070192DC29DB9171118B07CC /* PIAPIEnvironmentTableViewCell.h */; };
+		6B79547DBBA0BAFEEA6D9E6B2DA051F5 /* PIAPIEnvironmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6433BE40E3D5A1BDF1400805FE596B6 /* PIAPIEnvironmentTableViewCell.m */; };
+		71D1135DE99A69DBE9008FC057D26A07 /* PIAPIEnvironmentEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = D17469E0093E1394CF6E86D8404AB290 /* PIAPIEnvironmentEnums.h */; };
+		8E5EBD2EBE3141EDD8DABE79D495E7A4 /* PIUserDefaultCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC4CE8782B28F92C669897660220138 /* PIUserDefaultCache.h */; };
+		95941BA58E83E1DFC577C37E95D4018D /* PIAPIEnvironmentNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DE95C8E60133F07811F5618315557BD /* PIAPIEnvironmentNavigationController.h */; };
+		9B5BAC00FABCB485D5B4CCBEFBA58949 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 987A02CD4D5D490D11682BC9FB9067FA /* Pods-dummy.m */; };
+		A06C26E72ECB89BEB39A89C4DC316A12 /* PIInvokeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E317ECF745A049C487A176EE048870 /* PIInvokeManager.h */; };
+		A9F10C4C345C341DB5EA3CE9AAD2730F /* PIAPIEnvironmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C65E97C56372F01DECD324C6CEC0052A /* PIAPIEnvironmentViewController.m */; };
+		B419CBD7B67E77AD36088CA406297B66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095CF4C6050FA9D886B3707E2835BEA7 /* Foundation.framework */; };
+		BC4E7D031A96536ED960808BD527C056 /* PIAPIEnvironmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4D12E595F5CE728F8CFFE8337DF0CAE /* PIAPIEnvironmentTableViewCell.xib */; };
+		C270FEF04B244045E098D0FA3310C683 /* PIAPIEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 433812F6B9DF89D3575683381914B1AE /* PIAPIEnvironmentManager.m */; };
+		F106C9AF4146A7CFD751326E6658DA6B /* PIAPIEnvironmentManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 576EF3EC429F2DB7F516567C7C3F4052 /* PIAPIEnvironmentManager-dummy.m */; };
+		FC5CBE93FF6DD06731892B429BF93B33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095CF4C6050FA9D886B3707E2835BEA7 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4182FD9F5AB1EA0971D06A119B6F04BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E127EBB5DD78DBD8DF25C419DE51B15;
+			remoteInfo = "PIAPIEnvironmentManager-PIAPIEnvironmentManager";
+		};
+		CC7DF033B3FC258023DD06134329F78A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81DD0D281A00140792092F49F836390B;
+			remoteInfo = PIAPIEnvironmentManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		095CF4C6050FA9D886B3707E2835BEA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		0DC4CE8782B28F92C669897660220138 /* PIUserDefaultCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIUserDefaultCache.h; sourceTree = "<group>"; };
+		15A529C27057E4A57D259CBC6E6CE49C /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "PIAPIEnvironmentManager-Private.xcconfig"; sourceTree = "<group>"; };
+		29F3EEAF87754F1FF3E80D9B068D95F0 /* PIAPIEnvironmentManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentManager.h; sourceTree = "<group>"; };
+		3449548FB140C291102D1113F2B493F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E69177DA30C90B1027FC70A88353631 /* libPIAPIEnvironmentManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPIAPIEnvironmentManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		433812F6B9DF89D3575683381914B1AE /* PIAPIEnvironmentManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentManager.m; sourceTree = "<group>"; };
+		4DE95C8E60133F07811F5618315557BD /* PIAPIEnvironmentNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentNavigationController.h; sourceTree = "<group>"; };
+		576EF3EC429F2DB7F516567C7C3F4052 /* PIAPIEnvironmentManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PIAPIEnvironmentManager-dummy.m"; sourceTree = "<group>"; };
+		605EF29326A563BCF56B66126CF583FA /* PIAPIEnvironmentNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentNavigationController.m; sourceTree = "<group>"; };
+		641AE05DD55E5E6AC1590CD7B4A18F97 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		72DE67131BADA83AD8C6721E73807FF2 /* PIUserDefaultCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIUserDefaultCache.m; sourceTree = "<group>"; };
+		8A23715132195A298D7761487AD0D990 /* PIAPIEnvironmentManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PIAPIEnvironmentManager-prefix.pch"; sourceTree = "<group>"; };
+		987A02CD4D5D490D11682BC9FB9067FA /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		9A223FB3E32377047380ABB2276D4C5F /* PIAPIEnvironmentManager.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PIAPIEnvironmentManager.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC9B8E33DDF9E4BA04A29FD791385D84 /* PIAPIEnvironmentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentViewController.h; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BF59BC15D23E1E1912C8F334E7236813 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		C6433BE40E3D5A1BDF1400805FE596B6 /* PIAPIEnvironmentTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentTableViewCell.m; sourceTree = "<group>"; };
+		C65E97C56372F01DECD324C6CEC0052A /* PIAPIEnvironmentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIAPIEnvironmentViewController.m; sourceTree = "<group>"; };
+		CCB44094318F38F95A05C27DFAAC62BC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		D17469E0093E1394CF6E86D8404AB290 /* PIAPIEnvironmentEnums.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentEnums.h; sourceTree = "<group>"; };
+		D42F683D6F6DD2171C98A7186D00D977 /* PIAPIEnvironmentCacheProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentCacheProvider.h; sourceTree = "<group>"; };
+		D565C1CE070192DC29DB9171118B07CC /* PIAPIEnvironmentTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentTableViewCell.h; sourceTree = "<group>"; };
+		D8E317ECF745A049C487A176EE048870 /* PIInvokeManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIInvokeManager.h; sourceTree = "<group>"; };
+		E3C251179CEE1779DE602659F6F38D38 /* PIAPIEnvironmentObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PIAPIEnvironmentObject.h; sourceTree = "<group>"; };
+		E4D12E595F5CE728F8CFFE8337DF0CAE /* PIAPIEnvironmentTableViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = PIAPIEnvironmentTableViewCell.xib; sourceTree = "<group>"; };
+		E4F8706EB40E2A666E5FEE0DACB8C589 /* PIAPIEnvironmentManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PIAPIEnvironmentManager.xcconfig; sourceTree = "<group>"; };
+		F8DE41319B78A1B01C6D9C3997EF72B1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		FA47329AA5B256FB89A03FFE8539EBFC /* PIInvokeManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PIInvokeManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		31D589BD892E66FC1BC65538D97CE747 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC5CBE93FF6DD06731892B429BF93B33 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E3F1E26EDEB16B12BD1A257C2878059 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B419CBD7B67E77AD36088CA406297B66 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B214052BEEB58E70258E8148BDAE8C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3E7A56CB9C6059EF88ABF9F0FA4BCDBC /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				3F259BB7671AFF2F17C8716B17278A40 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		3F259BB7671AFF2F17C8716B17278A40 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D42F683D6F6DD2171C98A7186D00D977 /* PIAPIEnvironmentCacheProvider.h */,
+				D17469E0093E1394CF6E86D8404AB290 /* PIAPIEnvironmentEnums.h */,
+				29F3EEAF87754F1FF3E80D9B068D95F0 /* PIAPIEnvironmentManager.h */,
+				433812F6B9DF89D3575683381914B1AE /* PIAPIEnvironmentManager.m */,
+				4DE95C8E60133F07811F5618315557BD /* PIAPIEnvironmentNavigationController.h */,
+				605EF29326A563BCF56B66126CF583FA /* PIAPIEnvironmentNavigationController.m */,
+				E3C251179CEE1779DE602659F6F38D38 /* PIAPIEnvironmentObject.h */,
+				D565C1CE070192DC29DB9171118B07CC /* PIAPIEnvironmentTableViewCell.h */,
+				C6433BE40E3D5A1BDF1400805FE596B6 /* PIAPIEnvironmentTableViewCell.m */,
+				AC9B8E33DDF9E4BA04A29FD791385D84 /* PIAPIEnvironmentViewController.h */,
+				C65E97C56372F01DECD324C6CEC0052A /* PIAPIEnvironmentViewController.m */,
+				D8E317ECF745A049C487A176EE048870 /* PIInvokeManager.h */,
+				FA47329AA5B256FB89A03FFE8539EBFC /* PIInvokeManager.m */,
+				0DC4CE8782B28F92C669897660220138 /* PIUserDefaultCache.h */,
+				72DE67131BADA83AD8C6721E73807FF2 /* PIUserDefaultCache.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		53F661C0CA7190D2CF05023FB33D61E4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				095CF4C6050FA9D886B3707E2835BEA7 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		65F0ADDFB97FE7EAE9FC9AC4050978B8 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				CBC06B3AADABAFB2B1514507CF3F9B12 /* Views */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				9653DFFFCD9A6B2C1DF33E6262F018C4 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				D2411A5FE7F7A004607BED49990C37F4 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		891BD743811DDEB3D0CBCDA2370920E1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4F8706EB40E2A666E5FEE0DACB8C589 /* PIAPIEnvironmentManager.xcconfig */,
+				27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */,
+				576EF3EC429F2DB7F516567C7C3F4052 /* PIAPIEnvironmentManager-dummy.m */,
+				8A23715132195A298D7761487AD0D990 /* PIAPIEnvironmentManager-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/PIAPIEnvironmentManager";
+			sourceTree = "<group>";
+		};
+		952EEBFAF8F7E620423C9F156F25A506 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15A529C27057E4A57D259CBC6E6CE49C /* Pods-acknowledgements.markdown */,
+				BF59BC15D23E1E1912C8F334E7236813 /* Pods-acknowledgements.plist */,
+				987A02CD4D5D490D11682BC9FB9067FA /* Pods-dummy.m */,
+				641AE05DD55E5E6AC1590CD7B4A18F97 /* Pods-resources.sh */,
+				F8DE41319B78A1B01C6D9C3997EF72B1 /* Pods.debug.xcconfig */,
+				CCB44094318F38F95A05C27DFAAC62BC /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		9653DFFFCD9A6B2C1DF33E6262F018C4 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E45DB09489745A0DC555E9C554794AB9 /* PIAPIEnvironmentManager */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		A2F5D69CCBE073D674B2C257195C66D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				65F0ADDFB97FE7EAE9FC9AC4050978B8 /* Pod */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F661C0CA7190D2CF05023FB33D61E4 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CBC06B3AADABAFB2B1514507CF3F9B12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E4D12E595F5CE728F8CFFE8337DF0CAE /* PIAPIEnvironmentTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A223FB3E32377047380ABB2276D4C5F /* PIAPIEnvironmentManager.bundle */,
+				3E69177DA30C90B1027FC70A88353631 /* libPIAPIEnvironmentManager.a */,
+				3449548FB140C291102D1113F2B493F1 /* libPods.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2411A5FE7F7A004607BED49990C37F4 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				952EEBFAF8F7E620423C9F156F25A506 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		E45DB09489745A0DC555E9C554794AB9 /* PIAPIEnvironmentManager */ = {
+			isa = PBXGroup;
+			children = (
+				3E7A56CB9C6059EF88ABF9F0FA4BCDBC /* Pod */,
+				A2F5D69CCBE073D674B2C257195C66D7 /* Resources */,
+				891BD743811DDEB3D0CBCDA2370920E1 /* Support Files */,
+			);
+			name = PIAPIEnvironmentManager;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5A0B12C747FC7CBDDEFE16AF08512C62 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39BA54C4A1FC89D8EE431E804E48C501 /* PIAPIEnvironmentCacheProvider.h in Headers */,
+				71D1135DE99A69DBE9008FC057D26A07 /* PIAPIEnvironmentEnums.h in Headers */,
+				08D00C8A37AC84458ACE4E15E1C84005 /* PIAPIEnvironmentManager.h in Headers */,
+				95941BA58E83E1DFC577C37E95D4018D /* PIAPIEnvironmentNavigationController.h in Headers */,
+				3496D2A77631B60D94E1FE0ED6821D12 /* PIAPIEnvironmentObject.h in Headers */,
+				5C0C5C63CE99F8D52921F4EAC11A1044 /* PIAPIEnvironmentTableViewCell.h in Headers */,
+				01966C0C16D8C817FC780BD728DEE438 /* PIAPIEnvironmentViewController.h in Headers */,
+				A06C26E72ECB89BEB39A89C4DC316A12 /* PIInvokeManager.h in Headers */,
+				8E5EBD2EBE3141EDD8DABE79D495E7A4 /* PIUserDefaultCache.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		434EED31C568524D42C7D8972C0C6F07 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2E00C2ACC2EBA22D236FE10D98208BA /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				1E816CB808CE02E89AD310A260F27EA9 /* Sources */,
+				7E3F1E26EDEB16B12BD1A257C2878059 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0AC5BD85F3AE5C722465D06724A723E /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 3449548FB140C291102D1113F2B493F1 /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4E127EBB5DD78DBD8DF25C419DE51B15 /* PIAPIEnvironmentManager-PIAPIEnvironmentManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 246CF04543E00676A4FC4B491957C1E9 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager-PIAPIEnvironmentManager" */;
+			buildPhases = (
+				ED11652BB7462A6F6D278BFC485FEF9E /* Sources */,
+				8B214052BEEB58E70258E8148BDAE8C1 /* Frameworks */,
+				06BA50B90B9AF90DB21743881267F6BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PIAPIEnvironmentManager-PIAPIEnvironmentManager";
+			productName = "PIAPIEnvironmentManager-PIAPIEnvironmentManager";
+			productReference = 9A223FB3E32377047380ABB2276D4C5F /* PIAPIEnvironmentManager.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		81DD0D281A00140792092F49F836390B /* PIAPIEnvironmentManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11942124CE69436B528A76D65B4E3A96 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager" */;
+			buildPhases = (
+				15F89DC4661F8009CC24EDAF10C70937 /* Sources */,
+				31D589BD892E66FC1BC65538D97CE747 /* Frameworks */,
+				5A0B12C747FC7CBDDEFE16AF08512C62 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E692CA92019040D5D0FBA43F917EBCD /* PBXTargetDependency */,
+			);
+			name = PIAPIEnvironmentManager;
+			productName = PIAPIEnvironmentManager;
+			productReference = 3E69177DA30C90B1027FC70A88353631 /* libPIAPIEnvironmentManager.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81DD0D281A00140792092F49F836390B /* PIAPIEnvironmentManager */,
+				4E127EBB5DD78DBD8DF25C419DE51B15 /* PIAPIEnvironmentManager-PIAPIEnvironmentManager */,
+				434EED31C568524D42C7D8972C0C6F07 /* Pods */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06BA50B90B9AF90DB21743881267F6BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC4E7D031A96536ED960808BD527C056 /* PIAPIEnvironmentTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15F89DC4661F8009CC24EDAF10C70937 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F106C9AF4146A7CFD751326E6658DA6B /* PIAPIEnvironmentManager-dummy.m in Sources */,
+				C270FEF04B244045E098D0FA3310C683 /* PIAPIEnvironmentManager.m in Sources */,
+				10FB2AFF043655AD1A5A2E851AF8135D /* PIAPIEnvironmentNavigationController.m in Sources */,
+				6B79547DBBA0BAFEEA6D9E6B2DA051F5 /* PIAPIEnvironmentTableViewCell.m in Sources */,
+				A9F10C4C345C341DB5EA3CE9AAD2730F /* PIAPIEnvironmentViewController.m in Sources */,
+				599417B93413875C4734ABDDC6DCC2B1 /* PIInvokeManager.m in Sources */,
+				2C6A5EC6ADAB62DBE6A77D29B013E4E7 /* PIUserDefaultCache.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E816CB808CE02E89AD310A260F27EA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B5BAC00FABCB485D5B4CCBEFBA58949 /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED11652BB7462A6F6D278BFC485FEF9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E692CA92019040D5D0FBA43F917EBCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PIAPIEnvironmentManager-PIAPIEnvironmentManager";
+			target = 4E127EBB5DD78DBD8DF25C419DE51B15 /* PIAPIEnvironmentManager-PIAPIEnvironmentManager */;
+			targetProxy = 4182FD9F5AB1EA0971D06A119B6F04BD /* PBXContainerItemProxy */;
+		};
+		B0AC5BD85F3AE5C722465D06724A723E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PIAPIEnvironmentManager;
+			target = 81DD0D281A00140792092F49F836390B /* PIAPIEnvironmentManager */;
+			targetProxy = CC7DF033B3FC258023DD06134329F78A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		052A17875CB827423D627183396CEB60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		24F56BCF7CFEDFAC3D6D8FB2B1668975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCB44094318F38F95A05C27DFAAC62BC /* Pods.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		32DD571265B03019B24F50AC1B7CDDA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = PIAPIEnvironmentManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4719D27B67A341168A71AEDCBF6F27BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PIAPIEnvironmentManager/PIAPIEnvironmentManager-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		48BB79E1EAAAA1C59DFE228D57A65620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8DE41319B78A1B01C6D9C3997EF72B1 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7490E55875A606544C82544BC529B17D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PIAPIEnvironmentManager/PIAPIEnvironmentManager-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		EDF52DF80E3B57893CD7D6F53925FE08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27AF3DFEED0026C0D2011567A53EE91E /* PIAPIEnvironmentManager-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = PIAPIEnvironmentManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11942124CE69436B528A76D65B4E3A96 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4719D27B67A341168A71AEDCBF6F27BE /* Debug */,
+				7490E55875A606544C82544BC529B17D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		246CF04543E00676A4FC4B491957C1E9 /* Build configuration list for PBXNativeTarget "PIAPIEnvironmentManager-PIAPIEnvironmentManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32DD571265B03019B24F50AC1B7CDDA7 /* Debug */,
+				EDF52DF80E3B57893CD7D6F53925FE08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
+				052A17875CB827423D627183396CEB60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2E00C2ACC2EBA22D236FE10D98208BA /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48BB79E1EAAAA1C59DFE228D57A65620 /* Debug */,
+				24F56BCF7CFEDFAC3D6D8FB2B1668975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

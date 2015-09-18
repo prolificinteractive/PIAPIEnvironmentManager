@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
                        PiOS PIAPIEnvironmentManager pod to help Prolific iOS Engineers manage API Environments.
              
                        DESC
-  s.homepage         = "https://bitbucket.org/prolificinteractive/piapienvironmentmanager"
+  s.homepage         = "git@github.com:prolificinteractive/PIAPIEnvironmentManager.git"
   s.license          = 'MIT'
   s.author           = { "Julio Rivera" => "julio@prolificinteractive.com" }
-  s.source           = { :git => "git@bitbucket.org:prolificinteractive/piapienvironmentmanager.git", :tag => s.version.to_s }
+  s.source           = { :git => "git@github.com:prolificinteractive/PIAPIEnvironmentManager.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
