@@ -33,9 +33,10 @@
 
     self.title = @"Environments";
 
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"]];
+    NSString *resourcePath = [[NSBundle bundleForClass:[PIAPIEnvironmentTableViewCell class]] pathForResource:@"PIAPIEnvironmentManager" ofType:@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:resourcePath];
 
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:bundle];
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([PIAPIEnvironmentTableViewCell class]) bundle:resourceBundle];
 
     [self.tableView registerNib:cellNib
          forCellReuseIdentifier:[PIAPIEnvironmentTableViewCell identifier]];
