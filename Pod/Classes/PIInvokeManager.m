@@ -83,7 +83,7 @@ static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block);
     [UIView animateWithDuration:0.2f animations:^{
         self.environmentWindow.alpha = 0.0f;
     } completion:^(BOOL finished) {
-        [self.environmentWindow resignKeyWindow];
+        self.environmentWindow.hidden = YES;
     }];
 }
 
