@@ -83,7 +83,7 @@ static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block);
     [UIView animateWithDuration:0.2f animations:^{
         self.environmentWindow.alpha = 0.0f;
     } completion:^(BOOL finished) {
-        [self.environmentWindow resignKeyWindow];
+        self.environmentWindow.hidden = YES;
     }];
 }
 
@@ -107,7 +107,7 @@ static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block);
 {
     if (!_environmentWindow) {
         _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [_environmentWindow setWindowLevel:UIWindowLevelNormal];
+        [_environmentWindow setWindowLevel:UIWindowLevelAlert + 1];
 
         _environmentWindow.rootViewController = [self generateEnvironmentViewControllerStack];
         [_environmentWindow addSubview:_environmentWindow.rootViewController.view];

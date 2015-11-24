@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PIAPIEnvironmentManager"
-  s.version          = "0.4.0"
+  s.version          = '0.4.1'
   s.summary          = "PiOS PIAPIEnvironmentManager pod to help iOS Engineers manage API Environments."
   s.description      = <<-DESC
                        PiOS PIAPIEnvironmentManager pod to help iOS Engineers manage API Environments in a simple way,
