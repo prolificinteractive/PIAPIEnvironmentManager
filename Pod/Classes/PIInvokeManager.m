@@ -107,7 +107,7 @@ static IMP PIReplaceMethodWithBlock(Class aClass, SEL origSEL, id block);
 {
     if (!_environmentWindow) {
         _environmentWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [_environmentWindow setWindowLevel:UIWindowLevelNormal];
+        [_environmentWindow setWindowLevel:UIWindowLevelAlert + 1];
 
         _environmentWindow.rootViewController = [self generateEnvironmentViewControllerStack];
         [_environmentWindow addSubview:_environmentWindow.rootViewController.view];
