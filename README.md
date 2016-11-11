@@ -1,4 +1,6 @@
-# README #
+# [DEPRECATED] PIAPIEnvironmentManager #
+
+⚠️ **This repository is no longer maintained or supported. New pull requests will not be reviewed.** ⚠️
 
 ## Summary 
 
